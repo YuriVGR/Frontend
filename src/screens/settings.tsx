@@ -1,15 +1,17 @@
-import React from 'react';
+import React, { useState } from "react";
 import { View, Text, StyleSheet, ScrollView } from "react-native";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { settingsData, SettingsItem } from "../api/settingsData";
 import { faAngleRight } from "@fortawesome/pro-solid-svg-icons";
+import colors from "../styles/colors";
+import Switch from "../components/switch";
 
-export default function SettingsScreen() {
+export default function Settings() {
   const getItemStyle = (item: SettingsItem) => {
     if (item.type === "danger") {
       return styles.dangerText;
     }
-    return {};
+    return;
   };
 
   const renderRightContent = (item: SettingsItem) => {
@@ -17,7 +19,10 @@ export default function SettingsScreen() {
       return <FontAwesomeIcon icon={faAngleRight} color="#888" size={16} />;
     }
     if (item.type === "picker") {
-      return <Text style={styles.pickerText}>[PICKER]</Text>;
+      return <Text>[PICKER]</Text>;
+    }
+    if (item.type === "boolean") {
+      return <Switch />;
     }
     return null;
   };
@@ -25,6 +30,7 @@ export default function SettingsScreen() {
   return (
     <View style={styles.container}>
       {/* Profile Header */}
+
       <View style={styles.profileHeader}>
         <View style={styles.picturePlacer}>
           <Text
@@ -35,7 +41,7 @@ export default function SettingsScreen() {
         </View>
         <View
           style={{
-            flexDirection: "row",
+            flexDirection: "column",
             justifyContent: "space-between",
             flexGrow: 1,
           }}
@@ -44,7 +50,13 @@ export default function SettingsScreen() {
             <Text style={styles.subTitle}>Logged in as</Text>
             <Text style={styles.title}>example@example.com</Text>
           </View>
-          <View style={{ justifyContent: "flex-end" }}>
+          <View
+            style={{
+              justifyContent: "flex-end",
+              flexDirection: "row",
+              paddingRight: 10,
+            }}
+          >
             <View style={styles.logoutButton}>
               <Text style={styles.logoutButtonText}>Logout</Text>
             </View>
@@ -52,21 +64,26 @@ export default function SettingsScreen() {
         </View>
       </View>
       {/* Settings */}
+
       <ScrollView
-        style={styles.settingsContainer}
         showsVerticalScrollIndicator={false}
+        style={{ width: "100%" }}
       >
         {settingsData.map((section, sectionIndex) => (
-          <View key={sectionIndex} style={styles.settingsComponent}>
-            <Text style={styles.settingsTitle}>{section.title}</Text>
-            {section.items.map((item, itemIndex) => (
-              <View key={itemIndex} style={styles.settingsItem}>
-                <Text style={[styles.settingsItemText, getItemStyle(item)]}>
-                  {item.title}
-                </Text>
-                {renderRightContent(item)}
-              </View>
-            ))}
+          <View key={sectionIndex} style={styles.settingsContainer}>
+            <Text style={styles.settingsTitle}>
+              {section.title}
+            </Text>
+            <View style={styles.settingsComponent}>
+              {section.items.map((item, itemIndex) => (
+                <View key={itemIndex} style={styles.settingsItem}>
+                  <Text style={[styles.settingsItemText, getItemStyle(item)]}>
+                    {item.title}
+                  </Text>
+                  {renderRightContent(item)}
+                </View>
+              ))}
+            </View>
           </View>
         ))}
       </ScrollView>
@@ -80,8 +97,8 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     paddingHorizontal: 20,
-    paddingTop: 10,
-    gap: 20,
+    paddingTop: 20,
+    gap: 20
   },
 
   // Profile Header
@@ -91,24 +108,17 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     padding: 10,
     borderRadius: 16,
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
-    elevation: 5,
     flexDirection: "row",
     gap: 10,
   },
   title: {
     fontSize: 16,
     fontWeight: "bold",
+    color: colors.light.textDark,
   },
   subTitle: {
     fontSize: 15,
-    color: "gray",
+    color: colors.light.text,
   },
   picturePlacer: {
     width: 100,
@@ -129,21 +139,22 @@ const styles = StyleSheet.create({
   },
   logoutButtonText: {
     color: "red",
-    fontWeight: "600",
+    fontWeight: "500",
   },
 
   // Settings
 
   settingsContainer: {
     width: "100%",
+    height: "auto",
     flexGrow: 1,
     borderRadius: 16,
-    gap: 10,
+    gap: 20,
+    paddingBottom: 20,
   },
   settingsTitle: {
     fontSize: 20,
     fontWeight: "bold",
-    marginBottom: 10,
     marginLeft: 10,
   },
   settingsComponent: {
@@ -165,9 +176,5 @@ const styles = StyleSheet.create({
   },
   dangerText: {
     color: "red",
-  },
-  pickerText: {
-    color: "#888",
-    fontSize: 14,
   },
 });

@@ -1,6 +1,6 @@
 import { View, Text, StyleSheet } from "react-native";
 
-export default function UpdateScreen() {
+export default function Update() {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Updates Screen</Text>

@@ -1,6 +1,6 @@
 import { View, Text, StyleSheet } from "react-native";
 
-export default function SearchScreen() {
+export default function Search() {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Search Screen</Text>
