@@ -21,4 +21,4 @@
 - [x] Setup Tab Navigation
 - [x] Setup Stack Navigation
 # DONE
-- Navigation
+- Basic Navigation Setup
