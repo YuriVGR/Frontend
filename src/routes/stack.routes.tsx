@@ -12,7 +12,7 @@ const SettingsStack = createStackNavigator();
 export function HomeStackScreen() {
   return (
     <HomeStack.Navigator>
-      <HomeStack.Screen name="HomeScreen" component={HomeScreen} />
+      <HomeStack.Screen name="Home" component={HomeScreen} />
     </HomeStack.Navigator>
   );
 }
@@ -20,7 +20,7 @@ export function HomeStackScreen() {
 export function SearchStackScreen() {
   return (
     <SearchStack.Navigator>
-      <SearchStack.Screen name="SearchScreen" component={SearchScreen} />
+      <SearchStack.Screen name="Search" component={SearchScreen} />
     </SearchStack.Navigator>
   );
 }
@@ -28,7 +28,7 @@ export function SearchStackScreen() {
 export function UpdateStackScreen() {
   return (
     <UpdateStack.Navigator>
-      <UpdateStack.Screen name="UpdateScreen" component={UpdateScreen} />
+      <UpdateStack.Screen name="Update" component={UpdateScreen} />
     </UpdateStack.Navigator>
   );
 }
@@ -36,7 +36,7 @@ export function UpdateStackScreen() {
 export function SettingsStackScreen() {
   return (
     <SettingsStack.Navigator>
-      <SettingsStack.Screen name="SettingsScreen" component={SettingsScreen} />
+      <SettingsStack.Screen name="Settings" component={SettingsScreen} />
     </SettingsStack.Navigator>
   );
 }
