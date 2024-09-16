@@ -1,6 +1,6 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
-
+import colors from "../styles/colors";
 import { IconDefinition } from "@fortawesome/fontawesome-svg-core";
 import {
   faHome,
@@ -30,6 +30,14 @@ export default function TabRoutes() {
             iconName = faCog;
           }
           return <FontAwesomeIcon icon={iconName} color={color} size={size} />;
+        },
+        tabBarLabelStyle: {
+          fontSize: 14,
+          fontWeight: "500",
+        },
+        tabBarStyle: {
+          backgroundColor: colors.light.background,
+          padding: 5
         },
       })}
     >
