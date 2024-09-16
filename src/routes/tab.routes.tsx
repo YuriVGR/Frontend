@@ -1,84 +1,42 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
+
+import { IconDefinition } from "@fortawesome/fontawesome-svg-core";
 import {
   faHome,
   faSearch,
   faCircleExclamation,
   faCog,
 } from "@fortawesome/pro-regular-svg-icons";
-import {
-  HomeStackScreen,
-  SearchStackScreen,
-  UpdateStackScreen,
-  SettingsStackScreen,
-} from "./stack.routes";
+
+import Home from "../screens/home";
+import Search from "../screens/search";
+import Update from "../screens/updates";
+import Settings from "../screens/settings";
 
 const Tab = createBottomTabNavigator();
 
 export default function TabRoutes() {
   return (
     <Tab.Navigator
-      screenOptions={{
-        headerShown: false,
-        tabBarShowLabel: true,
-        tabBarLabelStyle: {
-          fontSize: 12,
+      screenOptions={({ route }) => ({
+        tabBarIcon: ({ color, size }) => {
+          let iconName: IconDefinition = faHome;
+          if (route.name === "Search") {
+            iconName = faSearch;
+          } else if (route.name === "Update") {
+            iconName = faCircleExclamation;
+          } else if (route.name === "Settings") {
+            iconName = faCog;
+          }
+          return <FontAwesomeIcon icon={iconName} color={color} size={size} />;
         },
-      }}
+      })}
     >
-      <Tab.Screen
-        name="Home"
-        component={HomeStackScreen}
-        options={{
-          tabBarIcon: ({ color, size }) => (
-            <FontAwesomeIcon icon={faHome} size={24} color={color} />
-          ),
-          tabBarLabelStyle: {
-            fontSize: 12,
-          },
-        }}
-      />
-      <Tab.Screen
-        name="Search"
-        component={SearchStackScreen}
-        options={{
-          tabBarIcon: ({ color }) => (
-            <FontAwesomeIcon icon={faSearch} size={24} color={color} />
-          ),
-          tabBarLabelStyle: {
-            fontSize: 12,
-          },
-        }}
-      />
-      <Tab.Screen
-        name="Updates"
-        component={UpdateStackScreen}
-        options={{
-          tabBarIcon: ({ color }) => (
-            <FontAwesomeIcon
-              icon={faCircleExclamation}
-              size={24}
-              color={color}
-            />
-          ),
-          tabBarLabelStyle: {
-            fontSize: 12,
-          },
-        }}
-      />
-      <Tab.Screen
-        name="Settings"
-        component={SettingsStackScreen}
-        options={{
-          tabBarIcon: ({ color }) => (
-            <FontAwesomeIcon icon={faCog} size={24} color={color} />
-          ),
-          tabBarLabelStyle: {
-            fontSize: 12,
-          },
-        }}
-      />
+      <Tab.Screen name="Home" component={Home} />
+      <Tab.Screen name="Search" component={Search} />
+      <Tab.Screen name="Update" component={Update} />
+      <Tab.Screen name="Settings" component={Settings} />
     </Tab.Navigator>
   );
 }
