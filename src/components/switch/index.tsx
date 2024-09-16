@@ -27,8 +27,8 @@ export default function Switch() {
     }).start();
   }, [isEnabled]);
 
-  const toggleSize = containerWidth * 0.4;
-  const moveDistance = containerWidth - toggleSize - 10;
+  const toggleSize = containerWidth * 0.5;
+  const moveDistance = containerWidth - toggleSize - 8;
 
   return (
     <TouchableWithoutFeedback onPress={toggleSwitch}>
@@ -36,7 +36,7 @@ export default function Switch() {
         style={[styles.container, isEnabled && styles.containerEnabled]}
         onLayout={onLayout}
       >
-        <Animated.View
+        <Animated.View  
           style={[
             styles.toggle,
             {
@@ -60,12 +60,12 @@ export default function Switch() {
 
 const styles = StyleSheet.create({
   container: {
-    width: 60,
+    width: 50,
     height: 30,
     backgroundColor: colors.light.textLight,
     borderRadius: 15,
     justifyContent: "center",
-    padding: 5,
+    padding: 4,
   },
   containerEnabled: {
     backgroundColor: "#4cd964",
