@@ -3,7 +3,7 @@ import { View, Text, StyleSheet } from "react-native";
 export default function SettingsScreen() {
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Home Screen</Text>
+      <Text style={styles.title}>Settings Screen</Text>
     </View>
   );
 }
