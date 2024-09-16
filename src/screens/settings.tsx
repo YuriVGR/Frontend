@@ -29,51 +29,59 @@ export default function Settings() {
 
   return (
     <View style={styles.container}>
-      {/* Profile Header */}
-
-      <View style={styles.profileHeader}>
-        <View style={styles.picturePlacer}>
-          <Text
-            style={{ textAlign: "center", color: "white", fontWeight: "bold" }}
-          >
-            Picture Placeholder
-          </Text>
-        </View>
-        <View
-          style={{
-            flexDirection: "column",
-            justifyContent: "space-between",
-            flexGrow: 1,
-          }}
-        >
-          <View>
-            <Text style={styles.subTitle}>Logged in as</Text>
-            <Text style={styles.title}>example@example.com</Text>
-          </View>
-          <View
-            style={{
-              justifyContent: "flex-end",
-              flexDirection: "row",
-              paddingRight: 10,
-            }}
-          >
-            <View style={styles.logoutButton}>
-              <Text style={styles.logoutButtonText}>Logout</Text>
-            </View>
-          </View>
-        </View>
-      </View>
-      {/* Settings */}
-
       <ScrollView
         showsVerticalScrollIndicator={false}
         style={{ width: "100%" }}
       >
+        {/* Profile Header Section */}
+
+        <View style={styles.profileHeader}>
+          {/* Profile Picture Placeholder */}
+
+          <View style={styles.picturePlacer}>
+            <Text
+              style={{
+                textAlign: "center",
+                color: "white",
+                fontWeight: "bold",
+              }}
+            >
+              Picture Placeholder
+            </Text>
+          </View>
+          {/* User Info and Logout Button */}
+
+          <View
+            style={{
+              flexDirection: "column",
+              justifyContent: "space-between",
+              flexGrow: 1,
+            }}
+          >
+            <View>
+              <Text style={styles.subTitle}>Logged in as</Text>
+              <Text style={styles.title}>example@example.com</Text>
+            </View>
+            {/* Logout Button */}
+
+            <View
+              style={{
+                justifyContent: "flex-end",
+                flexDirection: "row",
+                paddingRight: 10,
+              }}
+            >
+              <View style={styles.logoutButton}>
+                <Text style={styles.logoutButtonText}>Logout</Text>
+              </View>
+            </View>
+          </View>
+        </View>
+        {/* Settings Section */}
+
         {settingsData.map((section, sectionIndex) => (
           <View key={sectionIndex} style={styles.settingsContainer}>
-            <Text style={styles.settingsTitle}>
-              {section.title}
-            </Text>
+            <Text style={styles.settingsTitle}>{section.title}</Text>
             <View style={styles.settingsComponent}>
               {section.items.map((item, itemIndex) => (
                 <View key={itemIndex} style={styles.settingsItem}>
@@ -98,7 +106,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     paddingHorizontal: 20,
     paddingTop: 20,
-    gap: 20
+    gap: 20,
   },
 
   // Profile Header
@@ -110,6 +118,7 @@ const styles = StyleSheet.create({
     borderRadius: 16,
     flexDirection: "row",
     gap: 10,
+    marginBottom: 10,
   },
   title: {
     fontSize: 16,
@@ -118,7 +127,8 @@ const styles = StyleSheet.create({
   },
   subTitle: {
     fontSize: 15,
-    color: colors.light.text,
+    color: colors.light.textLight,
+    fontWeight: "400",
   },
   picturePlacer: {
     width: 100,
@@ -169,7 +179,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    padding: 10,
+    padding: 5,
   },
   settingsItemText: {
     fontSize: 16,

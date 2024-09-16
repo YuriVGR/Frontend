@@ -1,7 +1,7 @@
 # TODO
 ## Home
 ### Static
-- [ ] Finish Static Home Screen
+- [x] Finish Static Home Screen (*May edit later*)
 - [ ] Finish Static Search Screen
 - [ ] Finish Static Update Screen
 - [ ] Finish Static Settings Screen
