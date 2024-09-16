@@ -1,10 +1,17 @@
 # TODO
 ## Home
-- [ ] Finish Home Screen
-- [ ] Finish Search Screen
-- [ ] Finish Update Screen
-- [ ] Finish Settings Screen
-- [ ] Finish Profile Screen
+### Static
+- [ ] Finish Static Home Screen
+- [ ] Finish Static Search Screen
+- [ ] Finish Static Update Screen
+- [ ] Finish Static Settings Screen
+- [ ] Finish Static Profile Screen
+### Dynamic
+- [ ] Finish Dynamic Home Screen
+- [ ] Finish Dynamic Search Screen
+- [ ] Finish Dynamic Update Screen
+- [ ] Finish Dynamic Settings Screen
+- [ ] Finish Dynamic Profile Screen
 ## Auth
 - [ ] Setup Login Screen
 - [ ] Setup Signup Screen
@@ -14,4 +21,4 @@
 - [x] Setup Tab Navigation
 - [x] Setup Stack Navigation
 # DONE
-Nothing yet
+- Navigation
