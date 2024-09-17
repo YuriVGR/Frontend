@@ -32,8 +32,11 @@
 
 ## Components
 
-- [x] Setup Picker Component
+- [ ] Setup Button Component
+- [ ] Setup Text Input Component
+- [ ] Setup Picker Component
 - [x] Setup Switch Component
+- [ ] Setup Card Component
 
 # DONE
 
