@@ -11,8 +11,9 @@ import {
 
 import Home from "../screens/home";
 import Search from "../screens/search";
-import Update from "../screens/updates";
+import Logs from "../screens/logs";
 import Settings from "../screens/settings";
+import LogTabRoutes from "./logtab.routes";
 
 const Tab = createBottomTabNavigator();
 
@@ -24,7 +25,7 @@ export default function TabRoutes() {
           let iconName: IconDefinition = faHome;
           if (route.name === "Search") {
             iconName = faSearch;
-          } else if (route.name === "Update") {
+          } else if (route.name === "Logs") {
             iconName = faCircleExclamation;
           } else if (route.name === "Settings") {
             iconName = faCog;
@@ -37,13 +38,13 @@ export default function TabRoutes() {
         },
         tabBarStyle: {
           backgroundColor: colors.light.background,
-          padding: 5
+          padding: 5,
         },
       })}
     >
       <Tab.Screen name="Home" component={Home} />
       <Tab.Screen name="Search" component={Search} />
-      <Tab.Screen name="Update" component={Update} />
+      <Tab.Screen name="Logs" component={LogTabRoutes} />
       <Tab.Screen name="Settings" component={Settings} />
     </Tab.Navigator>
   );

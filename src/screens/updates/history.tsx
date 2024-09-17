@@ -1,9 +1,9 @@
 import { View, Text, StyleSheet } from "react-native";
 
-export default function Update() {
+export default function History() {
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Updates Screen</Text>
+      <Text style={styles.title}>History Screen</Text>
     </View>
   );
 }
