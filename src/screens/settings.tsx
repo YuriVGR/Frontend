@@ -7,7 +7,7 @@ import {
   TouchableOpacity,
 } from "react-native";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
-import { settingsData, SettingsItem } from "../api/settingsData";
+import { settingsData, SettingsItem } from "../data/settingsData";
 import { faAngleRight } from "@fortawesome/pro-solid-svg-icons";
 import { DropdownPicker } from "../components/picker";
 import colors from "../styles/colors";

@@ -1,4 +1,5 @@
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
+import { logsData } from "../data/logsData";
 import colors from "../styles/colors";
 
 export default function Update() {
