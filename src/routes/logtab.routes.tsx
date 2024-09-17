@@ -1,7 +1,7 @@
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 import { NavigationContainer } from "@react-navigation/native";
-import Updates from "../screens/updates/updates";
-import History from "../screens/updates/history";
+import Updates from "../screens/logs/updates";
+import History from "../screens/logs/history";
 import Logs from "../screens/logs";
 
 const Tab = createMaterialTopTabNavigator();
