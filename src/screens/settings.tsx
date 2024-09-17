@@ -8,24 +8,18 @@ import {
 } from "react-native";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
-import { settingsData, SettingsItem } from "../data/settingsData";
+import {
+  settingsData,
+  SettingsItem,
+  RootStackParamList,
+} from "../data/settingsData";
 import { faAngleRight } from "@fortawesome/pro-solid-svg-icons";
 import { DropdownPicker } from "../components/picker";
-import { useNavigation } from "@react-navigation/native";
-import { StackNavigationProp } from "@react-navigation/stack";
+import { navigation } from "../data/settingsData";
 import colors from "../styles/colors";
 import Switch from "../components/switch";
 
 export default function Settings() {
-  type RootStackParamList = {
-    GeneralSettings: undefined;
-    ThemeSettings: undefined;
-    BackupSettings: undefined;
-    DownloadManager: undefined;
-  };
-
-  const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
-
   const getItemStyle = (item: SettingsItem) => {
     if (item.type === "danger") {
       return styles.dangerText;
