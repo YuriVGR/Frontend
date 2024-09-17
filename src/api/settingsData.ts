@@ -1,5 +1,4 @@
 import { IconDefinition } from "@fortawesome/fontawesome-svg-core";
-import { faAngleRight } from "@fortawesome/pro-solid-svg-icons";
 import { StyleProp, ViewStyle } from "react-native";
 
 type SettingsItemType = "default" | "danger" | "picker" | "boolean";
@@ -22,7 +21,12 @@ interface DangerSettingsItem extends BaseSettingsItem {
 
 interface PickerSettingsItem extends BaseSettingsItem {
   type: "picker";
-  options: string[];
+  options: PickerOption[];
+}
+
+interface PickerOption {
+  label: string;
+  value: string;
 }
 
 interface BooleanSettingsItem extends BaseSettingsItem {
@@ -92,7 +96,14 @@ export const settingsData: SettingsSection[] = [
       {
         type: "picker",
         title: "Image Cache Size",
-        options: ["100MB", "200MB", "500MB", "1GB"],
+        options: [
+          { label: "300MB", value: "300MB" },
+          { label: "500MB", value: "500MB" },
+          { label: "1GB", value: "1GB" },
+          { label: "3GB", value: "3GB" },
+          { label: "5GB", value: "5GB" },
+          { label: "10GB", value: "10GB" },
+        ],
       },
       {
         type: "danger",

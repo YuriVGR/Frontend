@@ -3,6 +3,7 @@ import { View, Text, StyleSheet, ScrollView } from "react-native";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { settingsData, SettingsItem } from "../api/settingsData";
 import { faAngleRight } from "@fortawesome/pro-solid-svg-icons";
+import { DropdownPicker } from "../components/picker";
 import colors from "../styles/colors";
 import Switch from "../components/switch";
 
@@ -16,16 +17,31 @@ export default function Settings() {
 
   const renderRightContent = (item: SettingsItem) => {
     if (item.type === "default") {
-      return <FontAwesomeIcon icon={faAngleRight} color="#888" size={16} />;
+      return (
+        <FontAwesomeIcon
+          icon={faAngleRight}
+          color={colors.light.textLight}
+          size={16}
+        />
+      );
     }
+
     if (item.type === "picker") {
-      return <Text>[PICKER]</Text>;
+      return (
+        <DropdownPicker
+          options={item.options}
+          selectedValue={item.options[0].value}
+          onValueChange={() => {}}
+        />
+      );
     }
     if (item.type === "boolean") {
       return <Switch />;
     }
     return null;
   };
+
+  const [modalVisible, setModalVisible] = useState(false);
 
   return (
     <View style={styles.container}>
@@ -159,7 +175,7 @@ const styles = StyleSheet.create({
     height: "auto",
     flexGrow: 1,
     borderRadius: 16,
-    gap: 20,
+    gap: 10,
     paddingBottom: 20,
   },
   settingsTitle: {
@@ -173,7 +189,6 @@ const styles = StyleSheet.create({
     padding: 10,
     borderRadius: 16,
     gap: 10,
-    marginBottom: 10,
   },
   settingsItem: {
     flexDirection: "row",
