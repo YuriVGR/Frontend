@@ -1,5 +1,11 @@
 import React, { useState } from "react";
-import { View, Text, StyleSheet, ScrollView } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  ScrollView,
+  TouchableOpacity,
+} from "react-native";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { settingsData, SettingsItem } from "../api/settingsData";
 import { faAngleRight } from "@fortawesome/pro-solid-svg-icons";
@@ -32,6 +38,8 @@ export default function Settings() {
           options={item.options}
           selectedValue={item.options[0].value}
           onValueChange={() => {}}
+          modalVisible={modalVisible}
+          setModalVisible={setModalVisible}
         />
       );
     }
@@ -47,7 +55,7 @@ export default function Settings() {
     <View style={styles.container}>
       <ScrollView
         showsVerticalScrollIndicator={false}
-        style={{ width: "100%" }}
+        style={{ width: "100%", paddingTop: 20 }}
       >
         {/* Profile Header Section */}
 
@@ -99,14 +107,46 @@ export default function Settings() {
           <View key={sectionIndex} style={styles.settingsContainer}>
             <Text style={styles.settingsTitle}>{section.title}</Text>
             <View style={styles.settingsComponent}>
-              {section.items.map((item, itemIndex) => (
-                <View key={itemIndex} style={styles.settingsItem}>
-                  <Text style={[styles.settingsItemText, getItemStyle(item)]}>
-                    {item.title}
-                  </Text>
-                  {renderRightContent(item)}
-                </View>
-              ))}
+              {section.items.map((item, itemIndex) => {
+                const ItemWrapper: React.ElementType =
+                  item.type === "boolean" ? View : TouchableOpacity;
+
+                const itemWrapperProps =
+                  item.type !== "boolean"
+                    ? {
+                        onPress: () => {
+                          if (item.type === "danger") {
+                            console.log("testing");
+                          } else if (item.type === "picker") {
+                            setModalVisible(true);
+                          } else if (item.type === "default") {
+                            console.log("testing");
+                          }
+                        },
+                      }
+                    : {};
+
+                return (
+                  <React.Fragment key={itemIndex}>
+                    <ItemWrapper
+                      style={styles.settingsItem}
+                      {...itemWrapperProps}
+                    >
+                      <Text
+                        style={[styles.settingsItemText, getItemStyle(item)]}
+                      >
+                        {item.title}
+                      </Text>
+                      {renderRightContent(item)}
+                    </ItemWrapper>
+
+                    {/* Add a divider, but not after the last item */}
+                    {itemIndex < section.items.length - 1 && (
+                      <View style={styles.divider} />
+                    )}
+                  </React.Fragment>
+                );
+              })}
             </View>
           </View>
         ))}
@@ -121,7 +161,6 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     paddingHorizontal: 20,
-    paddingTop: 20,
     gap: 20,
   },
 
@@ -186,20 +225,25 @@ const styles = StyleSheet.create({
   settingsComponent: {
     width: "100%",
     backgroundColor: "white",
-    padding: 10,
     borderRadius: 16,
-    gap: 10,
+    padding: 5
   },
   settingsItem: {
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    padding: 5,
+    padding: 15,
+    height: 50,
   },
   settingsItemText: {
     fontSize: 16,
   },
   dangerText: {
     color: "red",
+  },
+  divider: {
+    height: 1,
+    width: "100%",
+    backgroundColor: "#00000010",
   },
 });

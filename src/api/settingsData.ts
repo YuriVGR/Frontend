@@ -51,7 +51,6 @@ export const settingsData: SettingsSection[] = [
       {
         type: "boolean",
         title: "Hide Read History",
-        onPress: () => {},
       },
       {
         type: "danger",
@@ -75,10 +74,6 @@ export const settingsData: SettingsSection[] = [
       {
         type: "default",
         title: "Theme Settings",
-      },
-      {
-        type: "default",
-        title: "Error Popups",
       },
       {
         type: "default",
