@@ -12,7 +12,11 @@ export default function StackNavigator() {
         component={TabRoutes}
         options={{ headerShown: false }}
       />
-      <Stack.Screen name="LogTabs" component={TabRoutes}/>
+      <Stack.Screen
+        name="LogTabs"
+        component={TabRoutes}
+        options={{ headerShown: false }}
+      />
     </Stack.Navigator>
   );
 }

@@ -10,9 +10,8 @@ export default function LogTabRoutes() {
   return (
     <Tab.Navigator>
       <Tab.Screen name="Updates" component={Updates} />
-      <Tab.Screen name="Logs" component={Logs} />
+      <Tab.Screen name="MyLogs" component={Logs} options={{ title: "Logs" }} />
       <Tab.Screen name="History" component={History} />
     </Tab.Navigator>
   );
 }
-
