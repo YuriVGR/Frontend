@@ -10,10 +10,12 @@ import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { settingsData, SettingsItem } from "../data/settingsData";
 import { faAngleRight } from "@fortawesome/pro-solid-svg-icons";
 import { DropdownPicker } from "../components/picker";
+import { useNavigation } from "@react-navigation/native";
 import colors from "../styles/colors";
 import Switch from "../components/switch";
 
 export default function Settings() {
+  const navigation = useNavigation();
   const getItemStyle = (item: SettingsItem) => {
     if (item.type === "danger") {
       return styles.dangerText;
@@ -120,6 +122,7 @@ export default function Settings() {
                           } else if (item.type === "picker") {
                             setModalVisible(true);
                           } else if (item.type === "default") {
+                            navigation.navigate(item.title as never);
                             console.log("testing");
                           }
                         },
@@ -140,7 +143,6 @@ export default function Settings() {
                       {renderRightContent(item)}
                     </ItemWrapper>
 
-                    {/* Add a divider, but not after the last item */}
                     {itemIndex < section.items.length - 1 && (
                       <View style={styles.divider} />
                     )}
