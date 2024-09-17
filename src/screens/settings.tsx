@@ -7,15 +7,25 @@ import {
   TouchableOpacity,
 } from "react-native";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { settingsData, SettingsItem } from "../data/settingsData";
 import { faAngleRight } from "@fortawesome/pro-solid-svg-icons";
 import { DropdownPicker } from "../components/picker";
 import { useNavigation } from "@react-navigation/native";
+import { StackNavigationProp } from "@react-navigation/stack";
 import colors from "../styles/colors";
 import Switch from "../components/switch";
 
 export default function Settings() {
-  const navigation = useNavigation();
+  type RootStackParamList = {
+    GeneralSettings: undefined;
+    ThemeSettings: undefined;
+    BackupSettings: undefined;
+    DownloadManager: undefined;
+  };
+
+  const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
+
   const getItemStyle = (item: SettingsItem) => {
     if (item.type === "danger") {
       return styles.dangerText;
@@ -118,12 +128,15 @@ export default function Settings() {
                     ? {
                         onPress: () => {
                           if (item.type === "danger") {
-                            console.log("testing");
+                            console.log(item.title);
                           } else if (item.type === "picker") {
                             setModalVisible(true);
-                          } else if (item.type === "default") {
-                            navigation.navigate(item.title as never);
-                            console.log("testing");
+                            console.log(item.title);
+                          } else if (item.type === "default" && item.screen) {
+                            navigation.navigate(
+                              item.screen as keyof RootStackParamList
+                            );
+                            console.log(item.title);
                           }
                         },
                       }
@@ -228,7 +241,7 @@ const styles = StyleSheet.create({
     width: "100%",
     backgroundColor: "white",
     borderRadius: 16,
-    padding: 5
+    padding: 5,
   },
   settingsItem: {
     flexDirection: "row",

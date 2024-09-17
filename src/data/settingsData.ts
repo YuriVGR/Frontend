@@ -13,6 +13,7 @@ interface BaseSettingsItem {
 
 interface DefaultSettingsItem extends BaseSettingsItem {
   type: "default";
+  screen: string;
 }
 
 interface DangerSettingsItem extends BaseSettingsItem {
@@ -70,14 +71,17 @@ export const settingsData: SettingsSection[] = [
       {
         type: "default",
         title: "General Settings",
+        screen: "GeneralSettings",
       },
       {
         type: "default",
         title: "Theme Settings",
+        screen: "ThemeSettings",
       },
       {
         type: "default",
-        title: "Backups",
+        title: "Backup",
+        screen: "BackupSettings",
       },
     ],
   },
@@ -87,6 +91,7 @@ export const settingsData: SettingsSection[] = [
       {
         type: "default",
         title: "Download Manager",
+        screen: "DownloadManager",
       },
       {
         type: "picker",
