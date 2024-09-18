@@ -7,7 +7,8 @@ import {
   faCloudArrowUp,
   faDownload,
   faTrashCan,
-  faImageSlash
+  faImageSlash,
+  faFolderOpen,
 } from "@fortawesome/pro-regular-svg-icons";
 
 type SettingsItemType = "default" | "danger" | "picker" | "boolean";
@@ -115,7 +116,7 @@ export const settingsData: SettingsSection[] = [
           { label: "10GB", value: "10GB" },
         ],
         onPress: () => {},
-        leftIcon: faDownload,
+        leftIcon: faFolderOpen,
       },
       {
         type: "danger",
