@@ -8,9 +8,6 @@ import BackupSettings from "../screens/settings/settings_backup";
 import ReaderSettings from "../screens/settings/settings_reader";
 import DownloadManager from "../screens/settings/storage_downloadmanager";
 
-
-
-
 const Stack = createNativeStackNavigator();
 
 export default function StackNavigator() {
@@ -21,11 +18,31 @@ export default function StackNavigator() {
         component={TabRoutes}
         options={{ headerShown: false }}
       />
-      <Stack.Screen name="GeneralSettings" component={GeneralSettings} />
-      <Stack.Screen name="ThemeSettings" component={ThemeSettings} />
-      <Stack.Screen name="BackupSettings" component={BackupSettings} />
-      <Stack.Screen name="DownloadManager" component={DownloadManager} />
-      <Stack.Screen name="ReaderSettings" component={ReaderSettings} />
+      <Stack.Screen
+        name="GeneralSettings"
+        component={GeneralSettings}
+        options={{ title: "General Settings" }}
+      />
+      <Stack.Screen
+        name="ThemeSettings"
+        component={ThemeSettings}
+        options={{ title: "Theme Settings" }}
+      />
+      <Stack.Screen
+        name="BackupSettings"
+        component={BackupSettings}
+        options={{ title: "Backup Settings" }}
+      />
+      <Stack.Screen
+        name="DownloadManager"
+        component={DownloadManager}
+        options={{ title: "Download Manager" }}
+      />
+      <Stack.Screen
+        name="ReaderSettings"
+        component={ReaderSettings}
+        options={{ title: "Reader Settings" }}
+      />
     </Stack.Navigator>
   );
 }
