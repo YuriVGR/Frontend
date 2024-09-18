@@ -26,7 +26,7 @@ export default function StackNavigator() {
       <Stack.Screen
         name="ThemeSettings"
         component={ThemeSettings}
-        options={{ title: "Theme Settings" }}
+        options={{ title: "Appearance Settings" }}
       />
       <Stack.Screen
         name="BackupSettings"

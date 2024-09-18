@@ -11,7 +11,7 @@ import {
   faFolderOpen,
 } from "@fortawesome/pro-regular-svg-icons";
 
-type SettingsItemType = "default" | "danger" | "picker" | "boolean";
+// Settings Screens
 
 export type RootStackParamList = {
   GeneralSettings: undefined;
@@ -21,6 +21,8 @@ export type RootStackParamList = {
   ReaderSettings: undefined;
 };
 
+// Settings Item Types
+
 interface BaseSettingsItem {
   type: SettingsItemType;
   title: string;
@@ -29,6 +31,15 @@ interface BaseSettingsItem {
   style?: StyleProp<ViewStyle>;
   leftIconColor?: string;
 }
+
+type SettingsItemType =
+  | "default"
+  | "danger"
+  | "picker"
+  | "boolean"
+  | "selector";
+
+// Settings Items
 
 interface DefaultSettingsItem extends BaseSettingsItem {
   type: "default";
@@ -45,7 +56,23 @@ interface PickerSettingsItem extends BaseSettingsItem {
   options: PickerOption[];
 }
 
+interface SelectorSettingsItem extends BaseSettingsItem {
+  type: "selector";
+  options: SelectorOption[];
+}
+
 interface PickerOption {
+  label: string;
+  value: string;
+}
+
+interface SelectorOption {
+  label: string;
+  value: string;
+  subOptions: SubSelection[];
+}
+
+interface SubSelection {
   label: string;
   value: string;
 }
@@ -58,12 +85,15 @@ export type SettingsItem =
   | DefaultSettingsItem
   | DangerSettingsItem
   | PickerSettingsItem
-  | BooleanSettingsItem;
+  | BooleanSettingsItem
+  | SelectorSettingsItem;
 
 interface SettingsSection {
   title: string;
   items: SettingsItem[];
 }
+
+// Settings Data
 
 export const settingsData: SettingsSection[] = [
   {
@@ -77,7 +107,7 @@ export const settingsData: SettingsSection[] = [
       },
       {
         type: "default",
-        title: "Theme Settings",
+        title: "Appearance Settings",
         screen: "ThemeSettings",
         leftIcon: faPalette,
       },
@@ -131,6 +161,42 @@ export const settingsData: SettingsSection[] = [
         onPress: () => {},
         leftIcon: faTrashCan,
         leftIconColor: "red",
+      },
+    ],
+  },
+];
+
+// Theme Settings Data
+
+export const themeSettingsData: SettingsSection[] = [
+  {
+    title: "General Settings",
+    items: [
+      {
+        type: "selector",
+        title: "Theme Selector",
+        options: [
+          {
+            label: "Light",
+            value: "light",
+            subOptions: [
+              { label: "Minty", value: "#00ffd1" },
+              { label: "Sunset", value: "#ff4d4d" },
+              { label: "Purple", value: "#ff4dff" },
+              { label: "Blue", value: "#4d4dff" },
+            ],
+          },
+          {
+            label: "Dark",
+            value: "dark",
+            subOptions: [
+              { label: "Minty", value: "#00ffd1" },
+              { label: "Sunset", value: "#ff4d4d" },
+              { label: "Purple", value: "#ff4dff" },
+              { label: "Blue", value: "#4d4dff" },
+            ],
+          },
+        ],
       },
     ],
   },
