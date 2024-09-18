@@ -1,9 +1,5 @@
-import { StackNavigationProp } from "@react-navigation/stack";
-import { useNavigation } from "@react-navigation/native";
 import { IconDefinition } from "@fortawesome/fontawesome-svg-core";
 import { StyleProp, ViewStyle } from "react-native";
-import { useNavigation } from "@react-navigation/native";
-import { StackNavigationProp } from "@react-navigation/stack";
 
 type SettingsItemType = "default" | "danger" | "picker" | "boolean";
 
@@ -22,16 +18,6 @@ interface BaseSettingsItem {
   onPress?: () => void;
   style?: StyleProp<ViewStyle>;
 }
-
-export type RootStackParamList = {
-  GeneralSettings: undefined;
-  ThemeSettings: undefined;
-  BackupSettings: undefined;
-  DownloadManager: undefined;
-};
-
-export const navigation =
-  useNavigation<StackNavigationProp<RootStackParamList>>();
 
 interface DefaultSettingsItem extends BaseSettingsItem {
   type: "default";

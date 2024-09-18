@@ -16,7 +16,6 @@ import {
 import { faAngleRight } from "@fortawesome/pro-solid-svg-icons";
 import { useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
-
 import { DropdownPicker } from "../components/picker";
 import colors from "../styles/colors";
 import Switch from "../components/switch";
