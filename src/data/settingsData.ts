@@ -1,5 +1,14 @@
 import { IconDefinition } from "@fortawesome/fontawesome-svg-core";
 import { StyleProp, ViewStyle } from "react-native";
+import {
+  faGear,
+  faPalette,
+  faBook,
+  faCloudArrowUp,
+  faDownload,
+  faTrashCan,
+  faImageSlash
+} from "@fortawesome/pro-regular-svg-icons";
 
 type SettingsItemType = "default" | "danger" | "picker" | "boolean";
 
@@ -14,14 +23,16 @@ export type RootStackParamList = {
 interface BaseSettingsItem {
   type: SettingsItemType;
   title: string;
-  icon?: IconDefinition;
+  leftIcon?: IconDefinition;
   onPress?: () => void;
   style?: StyleProp<ViewStyle>;
+  leftIconColor?: string;
 }
 
 interface DefaultSettingsItem extends BaseSettingsItem {
   type: "default";
   screen: string;
+  rightIcon?: IconDefinition;
 }
 
 interface DangerSettingsItem extends BaseSettingsItem {
@@ -55,46 +66,31 @@ interface SettingsSection {
 
 export const settingsData: SettingsSection[] = [
   {
-    title: "History",
-    items: [
-      {
-        type: "boolean",
-        title: "Hide Read History",
-      },
-      {
-        type: "danger",
-        title: "Clear Search History",
-        onPress: () => {},
-      },
-      {
-        type: "danger",
-        title: "Clear Read History",
-        onPress: () => {},
-      },
-    ],
-  },
-  {
     title: "Settings",
     items: [
       {
         type: "default",
         title: "General Settings",
         screen: "GeneralSettings",
+        leftIcon: faGear,
       },
       {
         type: "default",
         title: "Theme Settings",
         screen: "ThemeSettings",
+        leftIcon: faPalette,
       },
       {
         type: "default",
         title: "Reader Settings",
         screen: "ReaderSettings",
+        leftIcon: faBook,
       },
       {
         type: "default",
-        title: "Backup",
+        title: "Backup Settings",
         screen: "BackupSettings",
+        leftIcon: faCloudArrowUp,
       },
     ],
   },
@@ -105,6 +101,7 @@ export const settingsData: SettingsSection[] = [
         type: "default",
         title: "Download Manager",
         screen: "DownloadManager",
+        leftIcon: faDownload,
       },
       {
         type: "picker",
@@ -117,10 +114,22 @@ export const settingsData: SettingsSection[] = [
           { label: "5GB", value: "5GB" },
           { label: "10GB", value: "10GB" },
         ],
+        onPress: () => {},
+        leftIcon: faDownload,
       },
       {
         type: "danger",
         title: "Clear Image Cache",
+        onPress: () => {},
+        leftIcon: faImageSlash,
+        leftIconColor: "red",
+      },
+      {
+        type: "danger",
+        title: "Clear Read History",
+        onPress: () => {},
+        leftIcon: faTrashCan,
+        leftIconColor: "red",
       },
     ],
   },

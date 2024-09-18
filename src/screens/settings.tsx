@@ -1,3 +1,4 @@
+// React Imports
 import React, { useState } from "react";
 import {
   View,
@@ -6,17 +7,28 @@ import {
   ScrollView,
   TouchableOpacity,
 } from "react-native";
-import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
-import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+
+// Data Imports
 import {
   settingsData,
   SettingsItem,
   RootStackParamList,
 } from "../data/settingsData";
-import { faAngleRight } from "@fortawesome/pro-solid-svg-icons";
+
+// Navigation Imports
 import { useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { DropdownPicker } from "../components/picker";
+
+// FontAwesome Imports
+import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
+import {
+  faAngleRight,
+  faEyeSlash,
+  IconDefinition,
+} from "@fortawesome/pro-regular-svg-icons";
+
+// Local Imports
 import colors from "../styles/colors";
 import Switch from "../components/switch";
 
@@ -25,9 +37,21 @@ export default function Settings() {
 
   const getItemStyle = (item: SettingsItem) => {
     if (item.type === "danger") {
-      return styles.dangerText;
+      return { color: "red" };
     }
     return;
+  };
+
+  const renderLeftContent = (item: SettingsItem) => {
+    if (item.leftIcon) {
+      return (
+        <FontAwesomeIcon
+          icon={item.leftIcon as IconDefinition}
+          color={item.leftIconColor || colors.light.textDark}
+          size={18}
+        />
+      );
+    }
   };
 
   const renderRightContent = (item: SettingsItem) => {
@@ -64,7 +88,7 @@ export default function Settings() {
     <View style={styles.container}>
       <ScrollView
         showsVerticalScrollIndicator={false}
-        style={{ width: "100%", paddingTop: 20 }}
+        style={{ width: "100%" }}
       >
         {/* Profile Header Section */}
 
@@ -104,17 +128,37 @@ export default function Settings() {
                 paddingRight: 10,
               }}
             >
-              <View style={styles.logoutButton}>
+              <TouchableOpacity style={styles.logoutButton}>
                 <Text style={styles.logoutButtonText}>Logout</Text>
-              </View>
+              </TouchableOpacity>
             </View>
           </View>
         </View>
         {/* Settings Section */}
-
+        <View style={styles.settingsItem}>
+          <View
+            style={{
+              flexDirection: "row",
+              gap: 10,
+              alignItems: "center",
+            }}
+          >
+            <FontAwesomeIcon
+              icon={faEyeSlash}
+              color={colors.light.textDark}
+              size={18}
+            />
+            <Text style={styles.text}>Hide Read History</Text>
+          </View>
+          <Switch />
+        </View>
         {settingsData.map((section, sectionIndex) => (
           <View key={sectionIndex} style={styles.settingsContainer}>
-            <Text style={styles.settingsTitle}>{section.title}</Text>
+            <Text
+              style={[styles.title, { marginLeft: 10, marginVertical: 10 }]}
+            >
+              {section.title}
+            </Text>
             <View style={styles.settingsComponent}>
               {section.items.map((item, itemIndex) => {
                 const ItemWrapper: React.ElementType =
@@ -145,11 +189,18 @@ export default function Settings() {
                       style={styles.settingsItem}
                       {...itemWrapperProps}
                     >
-                      <Text
-                        style={[styles.settingsItemText, getItemStyle(item)]}
+                      <View
+                        style={{
+                          flexDirection: "row",
+                          gap: 10,
+                          alignItems: "center",
+                        }}
                       >
-                        {item.title}
-                      </Text>
+                        {renderLeftContent(item)}
+                        <Text style={[styles.text, getItemStyle(item)]}>
+                          {item.title}
+                        </Text>
+                      </View>
                       {renderRightContent(item)}
                     </ItemWrapper>
 
@@ -172,31 +223,24 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    paddingHorizontal: 20,
     gap: 20,
+    backgroundColor: colors.light.background,
   },
 
   // Profile Header
 
   profileHeader: {
     width: "100%",
-    backgroundColor: "white",
     padding: 10,
+    paddingVertical: 20,
     borderRadius: 16,
     flexDirection: "row",
     gap: 10,
     marginBottom: 10,
+    borderBottomWidth: 1,
+    borderBottomColor: "#00000010",
   },
-  title: {
-    fontSize: 16,
-    fontWeight: "bold",
-    color: colors.light.textDark,
-  },
-  subTitle: {
-    fontSize: 15,
-    color: colors.light.textLight,
-    fontWeight: "400",
-  },
+
   picturePlacer: {
     width: 100,
     height: 100,
@@ -226,19 +270,10 @@ const styles = StyleSheet.create({
     height: "auto",
     flexGrow: 1,
     borderRadius: 16,
-    gap: 10,
-    paddingBottom: 20,
-  },
-  settingsTitle: {
-    fontSize: 20,
-    fontWeight: "bold",
-    marginLeft: 10,
   },
   settingsComponent: {
     width: "100%",
-    backgroundColor: "white",
     borderRadius: 16,
-    padding: 5,
   },
   settingsItem: {
     flexDirection: "row",
@@ -247,15 +282,28 @@ const styles = StyleSheet.create({
     padding: 15,
     height: 50,
   },
-  settingsItemText: {
-    fontSize: 16,
+
+  // General
+
+  title: {
+    fontSize: 18,
+    fontWeight: "bold",
+
+    color: colors.light.textDark,
   },
-  dangerText: {
-    color: "red",
+  subTitle: {
+    fontSize: 15,
+    color: colors.light.textLight,
+    fontWeight: "400",
+  },
+  text: {
+    fontSize: 16,
+    color: colors.light.textDark,
   },
   divider: {
     height: 1,
     width: "100%",
     backgroundColor: "#00000010",
+    marginLeft: 15,
   },
 });
