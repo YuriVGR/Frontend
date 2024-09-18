@@ -54,32 +54,31 @@ export const DropdownPicker = ({
           <FontAwesomeIcon icon={faAngleDown} style={{ marginTop: -2.5 }} />
         </View>
       </View>
-      <Modal visible={modalVisible} transparent={true}>
-        <TouchableOpacity
-          style={styles.modalContainer}
-          onPress={() => setModalVisible(false)}
-        >
-          <View style={styles.optionsContainer}>
-            {options.map((option, itemIndex) => (
-              <React.Fragment key={itemIndex}>
-                <DropdownPickerItem
-                  key={itemIndex}
-                  label={option.label}
-                  value={option.value}
-                  onPress={() => {
-                    setSelected(option.value);
-                    onValueChange(option.value);
-                    setModalVisible(false);
-                  }}
-                />
+      <Modal visible={modalVisible} transparent={true} animationType="fade">
+        <TouchableWithoutFeedback onPress={() => setModalVisible(false)}>
+          <View style={styles.modalContainer}>
+            <View style={styles.optionsContainer}>
+              {options.map((option, itemIndex) => (
+                <React.Fragment key={itemIndex}>
+                  <DropdownPickerItem
+                    key={itemIndex}
+                    label={option.label}
+                    value={option.value}
+                    onPress={() => {
+                      setSelected(option.value);
+                      onValueChange(option.value);
+                      setModalVisible(false);
+                    }}
+                  />
 
-                {itemIndex < options.length - 1 && (
-                  <View style={styles.divider} />
-                )}
-              </React.Fragment>
-            ))}
+                  {itemIndex < options.length - 1 && (
+                    <View style={styles.divider} />
+                  )}
+                </React.Fragment>
+              ))}
+            </View>
           </View>
-        </TouchableOpacity>
+        </TouchableWithoutFeedback>
       </Modal>
     </View>
   );
@@ -95,6 +94,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     backgroundColor: "rgba(0, 0, 0, 0.5)",
+    position: "absolute",
   },
   optionsContainer: {
     backgroundColor: "white",
@@ -116,7 +116,6 @@ const styles = StyleSheet.create({
     alignSelf: "center",
   },
 
-  // Button
   // Button
   button: {
     flexDirection: "row",
