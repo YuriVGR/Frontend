@@ -2,8 +2,18 @@ import { StackNavigationProp } from "@react-navigation/stack";
 import { useNavigation } from "@react-navigation/native";
 import { IconDefinition } from "@fortawesome/fontawesome-svg-core";
 import { StyleProp, ViewStyle } from "react-native";
+import { useNavigation } from "@react-navigation/native";
+import { StackNavigationProp } from "@react-navigation/stack";
 
 type SettingsItemType = "default" | "danger" | "picker" | "boolean";
+
+export type RootStackParamList = {
+  GeneralSettings: undefined;
+  ThemeSettings: undefined;
+  BackupSettings: undefined;
+  DownloadManager: undefined;
+  ReaderSettings: undefined;
+};
 
 interface BaseSettingsItem {
   type: SettingsItemType;
@@ -89,6 +99,11 @@ export const settingsData: SettingsSection[] = [
         type: "default",
         title: "Theme Settings",
         screen: "ThemeSettings",
+      },
+      {
+        type: "default",
+        title: "Reader Settings",
+        screen: "ReaderSettings",
       },
       {
         type: "default",

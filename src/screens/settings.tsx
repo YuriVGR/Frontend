@@ -14,12 +14,16 @@ import {
   RootStackParamList,
 } from "../data/settingsData";
 import { faAngleRight } from "@fortawesome/pro-solid-svg-icons";
+import { useNavigation } from "@react-navigation/native";
+import { StackNavigationProp } from "@react-navigation/stack";
+
 import { DropdownPicker } from "../components/picker";
-import { navigation } from "../data/settingsData";
 import colors from "../styles/colors";
 import Switch from "../components/switch";
 
 export default function Settings() {
+  const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
+
   const getItemStyle = (item: SettingsItem) => {
     if (item.type === "danger") {
       return styles.dangerText;
