@@ -6,14 +6,44 @@ import {
   LayoutChangeEvent,
 } from "react-native";
 import { useState, useEffect, useRef } from "react";
-import colors from "../../styles/colors";
+import { colors } from "../../styles/colors";
 
-export default function Switch() {
+interface SwitchProps {
+  onValueChange?: (value: boolean) => void;
+  value: boolean;
+  onAdditionalPress?: () => void;
+  disabled?: () => void;
+}
+
+export default function Switch({
+  onValueChange,
+  value,
+  onAdditionalPress,
+  disabled,
+}: SwitchProps) {
   const [isEnabled, setIsEnabled] = useState(false);
   const [containerWidth, setContainerWidth] = useState(0);
   const toggleAnim = useRef(new Animated.Value(0)).current;
 
-  const toggleSwitch = () => setIsEnabled((previousState) => !previousState);
+  const toggleSwitch = () => {
+    setIsEnabled((previousState) => {
+      const newState = !previousState;
+      if (onValueChange) {
+        onValueChange(newState);
+        onValueChange(!value);
+      }
+      return newState;
+    });
+  };
+
+  const handlePress = () => {
+    toggleSwitch();
+    if (onAdditionalPress && !isEnabled) {
+      onAdditionalPress();
+    } else if (disabled) {
+      disabled();
+    }
+  };
 
   const onLayout = (event: LayoutChangeEvent) => {
     const { width } = event.nativeEvent.layout;
@@ -31,12 +61,12 @@ export default function Switch() {
   const moveDistance = containerWidth - toggleSize - 8;
 
   return (
-    <TouchableWithoutFeedback onPress={toggleSwitch}>
+    <TouchableWithoutFeedback onPress={handlePress}>
       <View
         style={[styles.container, isEnabled && styles.containerEnabled]}
         onLayout={onLayout}
       >
-        <Animated.View  
+        <Animated.View
           style={[
             styles.toggle,
             {
@@ -62,7 +92,7 @@ const styles = StyleSheet.create({
   container: {
     width: 50,
     height: 30,
-    backgroundColor: colors.light.textLight,
+    backgroundColor: colors.textLight,
     borderRadius: 15,
     justifyContent: "center",
     padding: 4,

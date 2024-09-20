@@ -9,6 +9,7 @@ import {
   faTrashCan,
   faImageSlash,
   faFolderOpen,
+  faMoon,
 } from "@fortawesome/pro-regular-svg-icons";
 
 // Settings Screens
@@ -173,12 +174,18 @@ export const themeSettingsData: SettingsSection[] = [
     title: "General Settings",
     items: [
       {
+        type: "boolean",
+        title: "Dark Mode",
+        onPress: () => {},
+        leftIcon: faMoon,
+      },
+      {
         type: "selector",
         title: "Theme Selector",
         options: [
           {
             label: "Light",
-            value: "light",
+            value: "#fff",
             subOptions: [
               { label: "Minty", value: "#00ffd1" },
               { label: "Sunset", value: "#ff4d4d" },
@@ -188,7 +195,7 @@ export const themeSettingsData: SettingsSection[] = [
           },
           {
             label: "Dark",
-            value: "dark",
+            value: "#1f2937",
             subOptions: [
               { label: "Minty", value: "#00ffd1" },
               { label: "Sunset", value: "#ff4d4d" },
@@ -198,6 +205,7 @@ export const themeSettingsData: SettingsSection[] = [
           },
         ],
       },
+      
     ],
   },
 ];

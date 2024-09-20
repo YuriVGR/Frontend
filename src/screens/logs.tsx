@@ -1,9 +1,8 @@
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import { logsData } from "../data/logsData";
-import colors from "../styles/colors";
+import { colors } from "../styles/colors";
 
 export default function Update() {
-
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Logs Screen</Text>
@@ -16,6 +15,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
+    backgroundColor: colors.background,
   },
   title: {
     fontSize: 20,
@@ -23,7 +23,7 @@ const styles = StyleSheet.create({
   },
   header: {
     padding: 10,
-    backgroundColor: colors.light.background,
+    backgroundColor: colors.background,
     width: "100%",
     position: "absolute",
     top: 0,

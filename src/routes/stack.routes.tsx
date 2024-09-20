@@ -8,15 +8,27 @@ import BackupSettings from "../screens/settings/settings_backup";
 import ReaderSettings from "../screens/settings/settings_reader";
 import DownloadManager from "../screens/settings/storage_downloadmanager";
 
+// Local Imports
+import { colors } from "../styles/colors";
+
 const Stack = createNativeStackNavigator();
 
 export default function StackNavigator() {
   return (
-    <Stack.Navigator>
+    <Stack.Navigator
+      screenOptions={{
+        headerStyle: {
+          backgroundColor: colors.background,
+        },
+        headerTintColor: colors.textDark,
+      }}
+    >
       <Stack.Screen
-        name="TabRoutes"
+        name="Return"
         component={TabRoutes}
-        options={{ headerShown: false }}
+        options={{
+          headerShown: false,
+        }}
       />
       <Stack.Screen
         name="GeneralSettings"

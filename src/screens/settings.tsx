@@ -29,11 +29,12 @@ import {
 } from "@fortawesome/pro-regular-svg-icons";
 
 // Local Imports
-import colors from "../styles/colors";
+import { colors } from "../styles/colors";
 import Switch from "../components/switch";
 
 export default function Settings() {
   const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
+  const [modalVisible, setModalVisible] = useState(false);
 
   const getItemStyle = (item: SettingsItem) => {
     if (item.type === "danger") {
@@ -47,7 +48,7 @@ export default function Settings() {
       return (
         <FontAwesomeIcon
           icon={item.leftIcon as IconDefinition}
-          color={item.leftIconColor || colors.light.textDark}
+          color={item.leftIconColor || colors.textDark}
           size={18}
         />
       );
@@ -59,7 +60,7 @@ export default function Settings() {
       return (
         <FontAwesomeIcon
           icon={faAngleRight}
-          color={colors.light.textLight}
+          color={colors.textDark}
           size={16}
         />
       );
@@ -76,13 +77,13 @@ export default function Settings() {
         />
       );
     }
+
     if (item.type === "boolean") {
-      return <Switch />;
+      return;
     }
+
     return null;
   };
-
-  const [modalVisible, setModalVisible] = useState(false);
 
   return (
     <View style={styles.container}>
@@ -145,12 +146,21 @@ export default function Settings() {
           >
             <FontAwesomeIcon
               icon={faEyeSlash}
-              color={colors.light.textDark}
+              color={colors.textDark}
               size={18}
             />
             <Text style={styles.text}>Hide Read History</Text>
           </View>
-          <Switch />
+          <Switch
+            value={false} // Replace with actual state value
+            onValueChange={(val) => {}}
+            onAdditionalPress={() => {
+              console.log("Switch enabled");
+            }}
+            disabled={() => {
+              console.log("Switch disabled");
+            }}
+          />
         </View>
         {settingsData.map((section, sectionIndex) => (
           <View key={sectionIndex} style={styles.settingsContainer}>
@@ -224,7 +234,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     gap: 20,
-    backgroundColor: colors.light.background,
+    backgroundColor: colors.background,
   },
 
   // Profile Header
@@ -237,8 +247,6 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     gap: 10,
     marginBottom: 10,
-    borderBottomWidth: 1,
-    borderBottomColor: "#00000010",
   },
 
   picturePlacer: {
@@ -252,7 +260,7 @@ const styles = StyleSheet.create({
   logoutButton: {
     backgroundColor: "#00000010",
     padding: 5,
-    borderRadius: 32,
+    borderRadius: 8,
     alignSelf: "flex-start",
     minWidth: 80,
     alignItems: "center",
@@ -289,21 +297,22 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: "bold",
 
-    color: colors.light.textDark,
+    color: colors.textDark,
   },
   subTitle: {
     fontSize: 15,
-    color: colors.light.textLight,
+    color: colors.textLight,
     fontWeight: "400",
   },
   text: {
     fontSize: 16,
-    color: colors.light.textDark,
+    color: colors.textDark,
   },
   divider: {
     height: 1,
     width: "100%",
-    backgroundColor: "#00000010",
+    backgroundColor: colors.divider,
     marginLeft: 15,
+    borderRadius: 10,
   },
 });
