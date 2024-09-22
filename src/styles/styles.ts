@@ -104,6 +104,13 @@ export const styles = StyleSheet.create({
     padding: 15,
     height: 50,
   },
+  selectorItem: {
+    flexDirection: "row",
+    justifyContent: "space-around",
+    alignItems: "center",
+    paddingHorizontal: 15,
+    paddingVertical: 10,
+  },
 });
 
 export const componentStyles = StyleSheet.create({

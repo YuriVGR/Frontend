@@ -11,7 +11,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { IconDefinition } from "@fortawesome/fontawesome-svg-core";
 
 // Data import
-import { themeSettingsData, SettingsItem } from "../../data/settingsData";
+import { SettingsItem } from "../../data/settingsData";
+import { themeSettingsData } from "../../data/settings/themesettingsData";
 
 // Components
 import Switch from "../../components/switch";
