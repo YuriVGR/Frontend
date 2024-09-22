@@ -4,6 +4,16 @@ import { Ionicons } from "@expo/vector-icons";
 // Styles
 import { colors } from "../styles/colors";
 
+// FontAwesome Imports
+import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
+import { IconDefinition } from "@fortawesome/fontawesome-svg-core";
+import {
+  faHome,
+  faMagnifyingGlass,
+  faBook,
+  faCog,
+} from "@fortawesome/pro-solid-svg-icons";
+
 // Screens
 import Home from "../screens/home";
 import Search from "../screens/search";
@@ -17,18 +27,18 @@ export default function TabRoutes() {
     <Tab.Navigator
       screenOptions={({ route }) => ({
         tabBarIcon: ({ color, size, focused }) => {
-          let iconName = focused ? "home" : "home-outline";
+          let iconName: IconDefinition = faHome;
           if (route.name === "Search") {
-            iconName = focused ? "search" : "search-outline";
+            iconName = faMagnifyingGlass;
           } else if (route.name === "Logs") {
-            iconName = focused ? "albums" : "albums-outline";
+            iconName = faBook;
           } else if (route.name === "Settings") {
-            iconName = focused ? "settings" : "settings-outline";
+            iconName = faCog;
           }
           return (
-            <Ionicons
-              name={iconName as any}
-              color={focused ? colors.primary : colors.text}
+            <FontAwesomeIcon
+              icon={iconName}
+              color={color}
               size={size}
             />
           );

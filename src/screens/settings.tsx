@@ -13,7 +13,8 @@ import {
 import { useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
 
-import { Ionicons } from "@expo/vector-icons";
+//FontAwesomeIcon
+import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 
 // Styles Imports
 import { styles } from "../styles/styles";
@@ -38,27 +39,25 @@ export default function Settings() {
   const renderLeftContent = (item: SettingsItem) => {
     if (item.leftIcon) {
       return (
-        <Ionicons
-          name={item.leftIcon as any}
-          color={item.type === "danger" ? colors.primary : colors.textDark}
+        <FontAwesomeIcon
+          icon={item.leftIcon}
           size={18}
+          color={item.type === "danger" ? item.leftIconColor : colors.textDark}
         />
       );
     }
   };
 
   const renderRightContent = (item: SettingsItem) => {
-    if (item.type === "default") {
+    if (item.type === "default" && item.rightIcon) {
       return (
-        <Ionicons
-          name="chevron-forward"
-          color={colors.textDark}
+        <FontAwesomeIcon
+          icon={item.rightIcon}
           size={18}
-          style={{ fontWeight: "bold" }}
+          color={colors.textDark}
         />
       );
     }
-
     if (item.type === "picker") {
       return (
         <DropdownPicker
@@ -70,11 +69,20 @@ export default function Settings() {
         />
       );
     }
-
     if (item.type === "boolean") {
-      return;
+      return (
+        <Switch
+          value={false} // Replace with actual state value
+          onValueChange={(val) => {}}
+          onAdditionalPress={() => {
+            console.log("Switch enabled");
+          }}
+          disabled={() => {
+            console.log("Switch disabled");
+          }}
+        />
+      );
     }
-
     return null;
   };
 
@@ -126,35 +134,6 @@ export default function Settings() {
           </View>
         </View>
         {/* Settings Section */}
-        <View style={styles.settingsComponent}>
-          <View style={styles.settingsItem}>
-            <View
-              style={{
-                flexDirection: "row",
-                gap: 10,
-                alignItems: "center",
-              }}
-            >
-              <Ionicons
-                name="eye-off-outline"
-                color={colors.textDark}
-                size={18}
-              />
-              <Text style={styles.text}>Hide Read History</Text>
-            </View>
-
-            <Switch
-              value={false} // Replace with actual state value
-              onValueChange={(val) => {}}
-              onAdditionalPress={() => {
-                console.log("Switch enabled");
-              }}
-              disabled={() => {
-                console.log("Switch disabled");
-              }}
-            />
-          </View>
-        </View>
         {settingsData.map((section, sectionIndex) => (
           <View key={sectionIndex} style={styles.settingsContainer}>
             <View style={styles.settingsComponent}>

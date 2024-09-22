@@ -10,7 +10,12 @@ import {
   faImageSlash,
   faFolderOpen,
   faMoon,
-} from "@fortawesome/pro-regular-svg-icons";
+  faCircleInfo,
+  faEnvelope,
+  faBug,
+  faEyeSlash,
+  faChevronRight,
+} from "@fortawesome/pro-solid-svg-icons";
 
 // Settings Screens
 
@@ -27,7 +32,7 @@ export type RootStackParamList = {
 interface BaseSettingsItem {
   type: SettingsItemType;
   title: string;
-  leftIcon?: string;
+  leftIcon?: IconDefinition;
   onPress?: () => void;
   style?: StyleProp<ViewStyle>;
   leftIconColor?: string;
@@ -98,32 +103,47 @@ interface SettingsSection {
 
 export const settingsData: SettingsSection[] = [
   {
+    title: "Hide Read History",
+    items: [
+      {
+        type: "boolean",
+        title: "Hide Read History",
+        onPress: () => {},
+        leftIcon: faEyeSlash,
+      },
+    ],
+  },
+  {
     title: "Settings",
     items: [
       {
         type: "default",
         title: "General Settings",
         screen: "GeneralSettings",
-        leftIcon: "cog-outline",
+        leftIcon: faGear,
+        rightIcon: faChevronRight,
       },
 
       {
         type: "default",
         title: "Appearance Settings",
         screen: "ThemeSettings",
-        leftIcon: "color-palette-outline",
+        leftIcon: faPalette,
+        rightIcon: faChevronRight,
       },
       {
         type: "default",
         title: "Reader Settings",
         screen: "ReaderSettings",
-        leftIcon: "book-outline",
+        leftIcon: faBook,
+        rightIcon: faChevronRight,
       },
       {
         type: "default",
         title: "Backup Settings",
         screen: "BackupSettings",
-        leftIcon: "cloud-upload-outline",
+        leftIcon: faCloudArrowUp,
+        rightIcon: faChevronRight,
       },
     ],
   },
@@ -134,7 +154,8 @@ export const settingsData: SettingsSection[] = [
         type: "default",
         title: "Download Manager",
         screen: "DownloadManager",
-        leftIcon: "download-outline",
+        leftIcon: faDownload,
+        rightIcon: faChevronRight,
       },
       {
         type: "picker",
@@ -148,13 +169,13 @@ export const settingsData: SettingsSection[] = [
           { label: "10GB", value: "10GB" },
         ],
         onPress: () => {},
-        leftIcon: "folder-open-outline",
+        leftIcon: faFolderOpen,
       },
       {
         type: "danger",
         title: "Clear Image Cache",
         onPress: () => {},
-        leftIcon: "trash-bin-outline",
+        leftIcon: faImageSlash,
         leftIconColor: "red",
       },
 
@@ -162,7 +183,7 @@ export const settingsData: SettingsSection[] = [
         type: "danger",
         title: "Clear Read History",
         onPress: () => {},
-        leftIcon: "trash-outline",
+        leftIcon: faTrashCan,
         leftIconColor: "red",
       },
     ],
@@ -174,19 +195,22 @@ export const settingsData: SettingsSection[] = [
         type: "default",
         title: "About",
         screen: "About",
-        leftIcon: "information-circle-outline",
+        leftIcon: faCircleInfo,
+        rightIcon: faChevronRight,
       },
       {
         type: "default",
         title: "Contact",
         screen: "Contact",
-        leftIcon: "mail-outline",
+        leftIcon: faEnvelope,
+        rightIcon: faChevronRight,
       },
       {
         type: "default",
         title: "Developer",
         screen: "Developer",
-        leftIcon: "bug-outline",
+        leftIcon: faBug,
+        rightIcon: faChevronRight,
       },
     ],
   },
@@ -202,7 +226,7 @@ export const themeSettingsData: SettingsSection[] = [
         type: "boolean",
         title: "Dark Mode",
         onPress: () => {},
-        leftIcon: "moon-outline",
+        leftIcon: faMoon,
       },
       {
         type: "selector",
