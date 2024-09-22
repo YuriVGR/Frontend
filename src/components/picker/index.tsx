@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import {
   View,
   Text,
@@ -7,9 +7,10 @@ import {
   StyleSheet,
   TouchableWithoutFeedback,
 } from "react-native";
-import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
-import { faAngleDown, faAngleUp } from "@fortawesome/pro-solid-svg-icons";
 import { colors } from "../../styles/colors";
+
+import { componentStyles } from "../../styles/styles";
+import { Ionicons } from "@expo/vector-icons";
 
 interface PickerProps {
   options: any[];
@@ -20,16 +21,16 @@ interface PickerProps {
 }
 
 interface ItemProps {
-  label: string[];
-  value: string[];
+  label: string;
   onPress: () => void;
 }
 
 const DropdownPickerItem = ({ label, onPress }: ItemProps) => {
   return (
-    <TouchableOpacity onPress={onPress} style={styles.item}>
+    <TouchableOpacity onPress={onPress} style={componentStyles.pickerModalItem}>
       <View>
         <Text style={{ fontWeight: "400", color: colors.text }}>{label}</Text>
+
       </View>
     </TouchableOpacity>
   );
@@ -48,40 +49,51 @@ export const DropdownPicker = ({
 
   return (
     <View>
-      <View style={{ flexDirection: "row", gap: 8, alignItems: "center" }}>
-        <Text style={styles.buttonText}>{selected}</Text>
+      <View style={componentStyles.pickerButton}>
+        <Text style={componentStyles.pickerButtonText}>{selected}</Text>
         <View style={{ flexDirection: "column" }}>
-          <FontAwesomeIcon
-            icon={faAngleUp}
+          <Ionicons
+            name="chevron-up"
+            color={colors.textDark}
+            size={18}
             style={{ marginBottom: -2.5 }}
-            color={colors.text}
           />
-          <FontAwesomeIcon
-            icon={faAngleDown}
+          <Ionicons
+            name="chevron-down"
+            color={colors.textDark}
+            size={18}
             style={{ marginTop: -2.5 }}
-            color={colors.text}
           />
         </View>
       </View>
+
       <Modal visible={modalVisible} transparent={true} animationType="fade">
         <TouchableWithoutFeedback onPress={() => setModalVisible(false)}>
-          <View style={styles.modalContainer}>
-            <View style={styles.optionsContainer}>
+          <View style={componentStyles.pickerModalContainer}>
+            <View
+              style={[
+                componentStyles.pickerOptionsContainer,
+                { backgroundColor: colors.background2 },
+              ]}
+            >
               {options.map((option, itemIndex) => (
                 <React.Fragment key={itemIndex}>
                   <DropdownPickerItem
                     key={itemIndex}
                     label={option.label}
-                    value={option.value}
                     onPress={() => {
                       setSelected(option.value);
                       onValueChange(option.value);
                       setModalVisible(false);
                     }}
                   />
-
                   {itemIndex < options.length - 1 && (
-                    <View style={styles.divider} />
+                    <View
+                      style={[
+                        componentStyles.pickerModalDivider,
+                        { backgroundColor: colors.divider },
+                      ]}
+                    />
                   )}
                 </React.Fragment>
               ))}
@@ -95,47 +107,4 @@ export const DropdownPicker = ({
 
 const styles = StyleSheet.create({
   // Modal
-
-  modalContainer: {
-    flex: 1,
-    width: "100%",
-    height: "100%",
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "rgba(0, 0, 0, 0.5)",
-    position: "absolute",
-  },
-  optionsContainer: {
-    backgroundColor: colors.background2,
-    borderRadius: 10,
-    flexDirection: "column",
-
-    width: "50%",
-  },
-  // Object
-
-  item: {
-    padding: 15,
-    paddingHorizontal: 15,
-    justifyContent: "center",
-  },
-  divider: {
-    height: 1,
-    width: "90%",
-    backgroundColor: colors.divider,
-    alignSelf: "center",
-  },
-
-  // Button
-  button: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
-    padding: 10,
-    gap: 5,
-  },
-  buttonText: {
-    fontSize: 16,
-    color: colors.text,
-  },
 });

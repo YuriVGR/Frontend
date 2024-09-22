@@ -1,19 +1,13 @@
 import { View, Text, StyleSheet } from "react-native";
-import { colors } from "../../styles/colors";
+import { styles } from "../../styles/styles";
 
 export default function ReaderSettings() {
   return (
+
     <View style={styles.container}>
-      <Text>Reader Settings</Text>
+      <Text style={styles.title}>Reader Settings</Text>
     </View>
   );
+
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: colors.background,
-  },
-});

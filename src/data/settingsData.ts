@@ -27,7 +27,7 @@ export type RootStackParamList = {
 interface BaseSettingsItem {
   type: SettingsItemType;
   title: string;
-  leftIcon?: IconDefinition;
+  leftIcon?: string;
   onPress?: () => void;
   style?: StyleProp<ViewStyle>;
   leftIconColor?: string;
@@ -104,25 +104,26 @@ export const settingsData: SettingsSection[] = [
         type: "default",
         title: "General Settings",
         screen: "GeneralSettings",
-        leftIcon: faGear,
+        leftIcon: "cog-outline",
       },
+
       {
         type: "default",
         title: "Appearance Settings",
         screen: "ThemeSettings",
-        leftIcon: faPalette,
+        leftIcon: "color-palette-outline",
       },
       {
         type: "default",
         title: "Reader Settings",
         screen: "ReaderSettings",
-        leftIcon: faBook,
+        leftIcon: "book-outline",
       },
       {
         type: "default",
         title: "Backup Settings",
         screen: "BackupSettings",
-        leftIcon: faCloudArrowUp,
+        leftIcon: "cloud-upload-outline",
       },
     ],
   },
@@ -133,7 +134,7 @@ export const settingsData: SettingsSection[] = [
         type: "default",
         title: "Download Manager",
         screen: "DownloadManager",
-        leftIcon: faDownload,
+        leftIcon: "download-outline",
       },
       {
         type: "picker",
@@ -147,21 +148,45 @@ export const settingsData: SettingsSection[] = [
           { label: "10GB", value: "10GB" },
         ],
         onPress: () => {},
-        leftIcon: faFolderOpen,
+        leftIcon: "folder-open-outline",
       },
       {
         type: "danger",
         title: "Clear Image Cache",
         onPress: () => {},
-        leftIcon: faImageSlash,
+        leftIcon: "trash-bin-outline",
         leftIconColor: "red",
       },
+
       {
         type: "danger",
         title: "Clear Read History",
         onPress: () => {},
-        leftIcon: faTrashCan,
+        leftIcon: "trash-outline",
         leftIconColor: "red",
+      },
+    ],
+  },
+  {
+    title: "Information",
+    items: [
+      {
+        type: "default",
+        title: "About",
+        screen: "About",
+        leftIcon: "information-circle-outline",
+      },
+      {
+        type: "default",
+        title: "Contact",
+        screen: "Contact",
+        leftIcon: "mail-outline",
+      },
+      {
+        type: "default",
+        title: "Developer",
+        screen: "Developer",
+        leftIcon: "bug-outline",
       },
     ],
   },
@@ -177,7 +202,7 @@ export const themeSettingsData: SettingsSection[] = [
         type: "boolean",
         title: "Dark Mode",
         onPress: () => {},
-        leftIcon: faMoon,
+        leftIcon: "moon-outline",
       },
       {
         type: "selector",
@@ -205,7 +230,6 @@ export const themeSettingsData: SettingsSection[] = [
           },
         ],
       },
-      
     ],
   },
 ];

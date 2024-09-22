@@ -1,19 +1,16 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import TabRoutes from "./tab.routes";
-
-// Settings Screens
 import GeneralSettings from "../screens/settings/settings_general";
 import ThemeSettings from "../screens/settings/settings_appearance";
 import BackupSettings from "../screens/settings/settings_backup";
 import ReaderSettings from "../screens/settings/settings_reader";
 import DownloadManager from "../screens/settings/storage_downloadmanager";
-
-// Local Imports
 import { colors } from "../styles/colors";
 
 const Stack = createNativeStackNavigator();
 
 export default function StackNavigator() {
+
   return (
     <Stack.Navigator
       screenOptions={{

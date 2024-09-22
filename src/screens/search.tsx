@@ -1,5 +1,5 @@
 import { View, Text, StyleSheet } from "react-native";
-import { colors } from "../styles/colors";
+import { styles } from "../styles/styles";
 
 export default function Search() {
   return (
@@ -8,16 +8,3 @@ export default function Search() {
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: colors.background,
-  },
-  title: {
-    fontSize: 20,
-    textAlign: "center",
-  },
-});

@@ -7,6 +7,7 @@ import { colors } from "../styles/colors";
 
 const Tab = createMaterialTopTabNavigator();
 
+
 export default function LogTabRoutes() {
   return (
     <Tab.Navigator
@@ -27,10 +28,7 @@ export default function LogTabRoutes() {
       }}
     >
       <Tab.Screen name="Updates" component={Updates} />
-      <Tab.Screen
-        name="My Logs"
-        component={Logs}
-      />
+      <Tab.Screen name="My Logs" component={Logs} />
       <Tab.Screen name="History" component={History} />
     </Tab.Navigator>
   );

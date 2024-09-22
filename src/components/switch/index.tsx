@@ -7,6 +7,7 @@ import {
 } from "react-native";
 import { useState, useEffect, useRef } from "react";
 import { colors } from "../../styles/colors";
+import { componentStyles } from "../../styles/styles";
 
 interface SwitchProps {
   onValueChange?: (value: boolean) => void;
@@ -30,7 +31,6 @@ export default function Switch({
       const newState = !previousState;
       if (onValueChange) {
         onValueChange(newState);
-        onValueChange(!value);
       }
       return newState;
     });
@@ -40,7 +40,7 @@ export default function Switch({
     toggleSwitch();
     if (onAdditionalPress && !isEnabled) {
       onAdditionalPress();
-    } else if (disabled) {
+    } else if (disabled && isEnabled) {
       disabled();
     }
   };
@@ -63,14 +63,18 @@ export default function Switch({
   return (
     <TouchableWithoutFeedback onPress={handlePress}>
       <View
-        style={[styles.container, isEnabled && styles.containerEnabled]}
+        style={[
+          componentStyles.switchContainer,
+          isEnabled && componentStyles.switchContainerEnabled,
+        ]}
         onLayout={onLayout}
       >
         <Animated.View
           style={[
-            styles.toggle,
+            componentStyles.switchToggle,
             {
               width: toggleSize,
+
               height: toggleSize,
               transform: [
                 {
@@ -87,21 +91,3 @@ export default function Switch({
     </TouchableWithoutFeedback>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    width: 50,
-    height: 30,
-    backgroundColor: colors.textLight,
-    borderRadius: 15,
-    justifyContent: "center",
-    padding: 4,
-  },
-  containerEnabled: {
-    backgroundColor: "#4cd964",
-  },
-  toggle: {
-    backgroundColor: "white",
-    borderRadius: 16,
-  },
-});

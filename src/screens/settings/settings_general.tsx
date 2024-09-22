@@ -1,5 +1,5 @@
 import { View, Text, StyleSheet } from "react-native";
-import { colors } from "../../styles/colors";
+import { styles } from "../../styles/styles";
 
 export default function GeneralSettings() {
   return (
@@ -9,11 +9,3 @@ export default function GeneralSettings() {
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: colors.background,
-  },
-});

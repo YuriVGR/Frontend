@@ -1,17 +1,12 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
-import { colors } from "../styles/colors";
-import { IconDefinition } from "@fortawesome/fontawesome-svg-core";
-import {
-  faHome,
-  faSearch,
-  faCircleExclamation,
-  faCog,
-} from "@fortawesome/pro-regular-svg-icons";
+import { Ionicons } from "@expo/vector-icons";
 
+// Styles
+import { colors } from "../styles/colors";
+
+// Screens
 import Home from "../screens/home";
 import Search from "../screens/search";
-import Logs from "../screens/logs";
 import Settings from "../screens/settings";
 import LogTabRoutes from "./logtab.routes";
 
@@ -21,31 +16,39 @@ export default function TabRoutes() {
   return (
     <Tab.Navigator
       screenOptions={({ route }) => ({
-        tabBarIcon: ({ color, size }) => {
-          let iconName: IconDefinition = faHome;
+        tabBarIcon: ({ color, size, focused }) => {
+          let iconName = focused ? "home" : "home-outline";
           if (route.name === "Search") {
-            iconName = faSearch;
+            iconName = focused ? "search" : "search-outline";
           } else if (route.name === "Logs") {
-            iconName = faCircleExclamation;
+            iconName = focused ? "albums" : "albums-outline";
           } else if (route.name === "Settings") {
-            iconName = faCog;
+            iconName = focused ? "settings" : "settings-outline";
           }
-          return <FontAwesomeIcon icon={iconName} color={color} size={size} />;
+          return (
+            <Ionicons
+              name={iconName as any}
+              color={focused ? colors.primary : colors.text}
+              size={size}
+            />
+          );
         },
         tabBarLabelStyle: {
           fontSize: 14,
           fontWeight: "500",
         },
         tabBarStyle: {
-          backgroundColor: colors.background2,
+          backgroundColor: colors.background,
           borderColor: "red",
           padding: 5,
         },
         tabBarActiveTintColor: colors.primary,
-        tabBarInactiveTintColor: colors.textLight,
+        tabBarInactiveTintColor: colors.text,
         headerStyle: {
-          backgroundColor: colors.background2,
+          backgroundColor: colors.background,
+
           shadowColor: colors.textLight,
+          height: 100,
         },
         headerTintColor: colors.textDark,
       })}
@@ -55,7 +58,7 @@ export default function TabRoutes() {
       <Tab.Screen
         name="Logs"
         component={LogTabRoutes}
-        options={{ headerStyle: { backgroundColor: colors.background2,  } }}
+        options={{ headerStyle: { backgroundColor: colors.background2 } }}
       />
       <Tab.Screen name="Settings" component={Settings} />
     </Tab.Navigator>

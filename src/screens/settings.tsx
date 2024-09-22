@@ -1,12 +1,6 @@
 // React Imports
 import React, { useState } from "react";
-import {
-  View,
-  Text,
-  StyleSheet,
-  ScrollView,
-  TouchableOpacity,
-} from "react-native";
+import { View, Text, ScrollView, TouchableOpacity } from "react-native";
 
 // Data Imports
 import {
@@ -18,19 +12,17 @@ import {
 // Navigation Imports
 import { useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
-import { DropdownPicker } from "../components/picker";
 
-// FontAwesome Imports
-import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
-import {
-  faAngleRight,
-  faEyeSlash,
-  IconDefinition,
-} from "@fortawesome/pro-regular-svg-icons";
+import { Ionicons } from "@expo/vector-icons";
 
-// Local Imports
+// Styles Imports
+import { styles } from "../styles/styles";
 import { colors } from "../styles/colors";
+
+// Components
+import { DropdownPicker } from "../components/picker";
 import Switch from "../components/switch";
+import Divider from "../components/divider";
 
 export default function Settings() {
   const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
@@ -38,7 +30,7 @@ export default function Settings() {
 
   const getItemStyle = (item: SettingsItem) => {
     if (item.type === "danger") {
-      return { color: "red" };
+      return { color: colors.primary };
     }
     return;
   };
@@ -46,9 +38,9 @@ export default function Settings() {
   const renderLeftContent = (item: SettingsItem) => {
     if (item.leftIcon) {
       return (
-        <FontAwesomeIcon
-          icon={item.leftIcon as IconDefinition}
-          color={item.leftIconColor || colors.textDark}
+        <Ionicons
+          name={item.leftIcon as any}
+          color={item.type === "danger" ? colors.primary : colors.textDark}
           size={18}
         />
       );
@@ -58,10 +50,11 @@ export default function Settings() {
   const renderRightContent = (item: SettingsItem) => {
     if (item.type === "default") {
       return (
-        <FontAwesomeIcon
-          icon={faAngleRight}
+        <Ionicons
+          name="chevron-forward"
           color={colors.textDark}
-          size={16}
+          size={18}
+          style={{ fontWeight: "bold" }}
         />
       );
     }
@@ -86,11 +79,8 @@ export default function Settings() {
   };
 
   return (
-    <View style={styles.container}>
-      <ScrollView
-        showsVerticalScrollIndicator={false}
-        style={{ width: "100%" }}
-      >
+    <View style={[styles.container]}>
+      <ScrollView style={[{ paddingHorizontal: 20 }]}>
         {/* Profile Header Section */}
 
         <View style={styles.profileHeader}>
@@ -136,39 +126,37 @@ export default function Settings() {
           </View>
         </View>
         {/* Settings Section */}
-        <View style={styles.settingsItem}>
-          <View
-            style={{
-              flexDirection: "row",
-              gap: 10,
-              alignItems: "center",
-            }}
-          >
-            <FontAwesomeIcon
-              icon={faEyeSlash}
-              color={colors.textDark}
-              size={18}
+        <View style={styles.settingsComponent}>
+          <View style={styles.settingsItem}>
+            <View
+              style={{
+                flexDirection: "row",
+                gap: 10,
+                alignItems: "center",
+              }}
+            >
+              <Ionicons
+                name="eye-off-outline"
+                color={colors.textDark}
+                size={18}
+              />
+              <Text style={styles.text}>Hide Read History</Text>
+            </View>
+
+            <Switch
+              value={false} // Replace with actual state value
+              onValueChange={(val) => {}}
+              onAdditionalPress={() => {
+                console.log("Switch enabled");
+              }}
+              disabled={() => {
+                console.log("Switch disabled");
+              }}
             />
-            <Text style={styles.text}>Hide Read History</Text>
           </View>
-          <Switch
-            value={false} // Replace with actual state value
-            onValueChange={(val) => {}}
-            onAdditionalPress={() => {
-              console.log("Switch enabled");
-            }}
-            disabled={() => {
-              console.log("Switch disabled");
-            }}
-          />
         </View>
         {settingsData.map((section, sectionIndex) => (
           <View key={sectionIndex} style={styles.settingsContainer}>
-            <Text
-              style={[styles.title, { marginLeft: 10, marginVertical: 10 }]}
-            >
-              {section.title}
-            </Text>
             <View style={styles.settingsComponent}>
               {section.items.map((item, itemIndex) => {
                 const ItemWrapper: React.ElementType =
@@ -207,16 +195,20 @@ export default function Settings() {
                         }}
                       >
                         {renderLeftContent(item)}
-                        <Text style={[styles.text, getItemStyle(item)]}>
+                        <Text
+                          style={[
+                            item.type === "danger"
+                              ? styles.dangerText
+                              : styles.text,
+                          ]}
+                        >
                           {item.title}
                         </Text>
                       </View>
                       {renderRightContent(item)}
                     </ItemWrapper>
 
-                    {itemIndex < section.items.length - 1 && (
-                      <View style={styles.divider} />
-                    )}
+                    {itemIndex < section.items.length - 1 && <Divider />}
                   </React.Fragment>
                 );
               })}
@@ -227,92 +219,3 @@ export default function Settings() {
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    gap: 20,
-    backgroundColor: colors.background,
-  },
-
-  // Profile Header
-
-  profileHeader: {
-    width: "100%",
-    padding: 10,
-    paddingVertical: 20,
-    borderRadius: 16,
-    flexDirection: "row",
-    gap: 10,
-    marginBottom: 10,
-  },
-
-  picturePlacer: {
-    width: 100,
-    height: 100,
-    backgroundColor: "red",
-    borderRadius: 50,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  logoutButton: {
-    backgroundColor: "#00000010",
-    padding: 5,
-    borderRadius: 8,
-    alignSelf: "flex-start",
-    minWidth: 80,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  logoutButtonText: {
-    color: "red",
-    fontWeight: "500",
-  },
-
-  // Settings
-
-  settingsContainer: {
-    width: "100%",
-    height: "auto",
-    flexGrow: 1,
-    borderRadius: 16,
-  },
-  settingsComponent: {
-    width: "100%",
-    borderRadius: 16,
-  },
-  settingsItem: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    padding: 15,
-    height: 50,
-  },
-
-  // General
-
-  title: {
-    fontSize: 18,
-    fontWeight: "bold",
-
-    color: colors.textDark,
-  },
-  subTitle: {
-    fontSize: 15,
-    color: colors.textLight,
-    fontWeight: "400",
-  },
-  text: {
-    fontSize: 16,
-    color: colors.textDark,
-  },
-  divider: {
-    height: 1,
-    width: "100%",
-    backgroundColor: colors.divider,
-    marginLeft: 15,
-    borderRadius: 10,
-  },
-});
