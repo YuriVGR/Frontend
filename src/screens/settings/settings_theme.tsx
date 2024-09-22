@@ -11,8 +11,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { IconDefinition } from "@fortawesome/fontawesome-svg-core";
 
 // Data import
-import { SettingsItem } from "../../data/settingsData";
-import { themeSettingsData } from "../../data/settings/themesettingsData";
+import { SettingsItem } from "../../data/settings_data";
+import { themeSettingsData } from "../../data/settings/settings_theme_data";
 
 // Components
 import Switch from "../../components/switch";
@@ -64,13 +64,7 @@ export default function ThemeSettings() {
                     {...itemWrapperProps}
                     style={styles.settingsItem}
                   >
-                    <View
-                      style={{
-                        flexDirection: "row",
-                        gap: 10,
-                        alignItems: "center",
-                      }}
-                    >
+                    <View style={styles.settingsItemLeft}>
                       {renderLeftContent(item)}
                       <Text
                         style={

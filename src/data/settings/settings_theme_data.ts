@@ -1,4 +1,4 @@
-import { SettingsSection } from "../settingsData";
+import { SettingsSection } from "../settings_data";
 import { faMoon, faDownload, faUpload } from "@fortawesome/pro-solid-svg-icons";
 
 export const themeSettingsData: SettingsSection[] = [

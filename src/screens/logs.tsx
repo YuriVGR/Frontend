@@ -1,5 +1,5 @@
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
-import { logsData } from "../data/logsData";
+import { logsData } from "../data/logs_data";
 import { styles } from "../styles/styles";
 
 export default function Update() {

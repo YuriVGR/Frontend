@@ -7,7 +7,7 @@ import {
   settingsData,
   SettingsItem,
   RootStackParamList,
-} from "../data/settingsData";
+} from "../data/settings_data";
 
 // Navigation Imports
 import { useNavigation } from "@react-navigation/native";
@@ -24,6 +24,7 @@ import { colors } from "../styles/colors";
 import { DropdownPicker } from "../components/picker";
 import Switch from "../components/switch";
 import Divider from "../components/divider";
+import SettingsItemComponent from "../components/settings_item";
 
 export default function Settings() {
   const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
@@ -138,58 +139,7 @@ export default function Settings() {
           <View key={sectionIndex} style={styles.settingsContainer}>
             <View style={styles.settingsComponent}>
               {section.items.map((item, itemIndex) => {
-                const ItemWrapper: React.ElementType =
-                  item.type === "boolean" ? View : TouchableOpacity;
-
-                const itemWrapperProps =
-                  item.type !== "boolean"
-                    ? {
-                        onPress: () => {
-                          if (item.type === "danger") {
-                            console.log(item.title);
-                          } else if (item.type === "picker") {
-                            setModalVisible(true);
-                            console.log(item.title);
-                          } else if (item.type === "default" && item.screen) {
-                            navigation.navigate(
-                              item.screen as keyof RootStackParamList
-                            );
-                            console.log(item.title);
-                          }
-                        },
-                      }
-                    : {};
-
-                return (
-                  <React.Fragment key={itemIndex}>
-                    <ItemWrapper
-                      style={styles.settingsItem}
-                      {...itemWrapperProps}
-                    >
-                      <View
-                        style={{
-                          flexDirection: "row",
-                          gap: 10,
-                          alignItems: "center",
-                        }}
-                      >
-                        {renderLeftContent(item)}
-                        <Text
-                          style={[
-                            item.type === "danger"
-                              ? styles.dangerText
-                              : styles.text,
-                          ]}
-                        >
-                          {item.title}
-                        </Text>
-                      </View>
-                      {renderRightContent(item)}
-                    </ItemWrapper>
-
-                    {itemIndex < section.items.length - 1 && <Divider />}
-                  </React.Fragment>
-                );
+                return <SettingsItemComponent item={item} key={itemIndex} />;
               })}
             </View>
           </View>

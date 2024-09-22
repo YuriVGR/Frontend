@@ -104,6 +104,11 @@ export const styles = StyleSheet.create({
     padding: 15,
     height: 50,
   },
+  settingsItemLeft: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 5,
+  },
   selectorItem: {
     flexDirection: "row",
     justifyContent: "space-around",
