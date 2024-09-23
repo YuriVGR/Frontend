@@ -1,7 +1,8 @@
-import { View, Text, StyleSheet } from "react-native";
-import { styles } from "../../styles/styles";
+import { View, Text } from "react-native";
+import { useTheme } from "../../hooks/themeprovider";
 
 export default function ReaderSettings() {
+  const { styles } = useTheme();
   return (
 
     <View style={styles.container}>

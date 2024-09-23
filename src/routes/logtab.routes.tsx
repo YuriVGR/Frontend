@@ -3,12 +3,20 @@ import { NavigationContainer } from "@react-navigation/native";
 import Updates from "../screens/logs/updates";
 import History from "../screens/logs/history";
 import Logs from "../screens/logs";
-import { colors } from "../styles/colors";
+import { getColors } from "../styles/colors";
+import { useTheme } from "../hooks/themeprovider";
+import { useState, useEffect } from "react";
 
 const Tab = createMaterialTopTabNavigator();
 
-
 export default function LogTabRoutes() {
+  const { styles } = useTheme();
+  const [colors, setColors] = useState(getColors());
+
+  useEffect(() => {
+    setColors(getColors());
+  }, [styles]);
+
   return (
     <Tab.Navigator
       screenOptions={{

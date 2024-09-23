@@ -1,7 +1,8 @@
 import { View, Text, StyleSheet } from "react-native";
-import { styles } from "../styles/styles";
+import { useTheme } from "../hooks/themeprovider";
 
 export default function Home() {
+  const { styles } = useTheme();
 
   return (
     <View style={styles.container}>

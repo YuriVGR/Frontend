@@ -7,9 +7,9 @@ import {
   StyleSheet,
   TouchableWithoutFeedback,
 } from "react-native";
-import { colors } from "../../styles/colors";
+import { getColors } from "../../../styles/colors";
 
-import { componentStyles } from "../../styles/styles";
+import { useTheme } from "../../../hooks/themeprovider";
 import { Ionicons } from "@expo/vector-icons";
 
 interface PickerProps {
@@ -25,12 +25,14 @@ interface ItemProps {
   onPress: () => void;
 }
 
+const colors = getColors();
+const { styles } = useTheme();
+
 const DropdownPickerItem = ({ label, onPress }: ItemProps) => {
   return (
-    <TouchableOpacity onPress={onPress} style={componentStyles.pickerModalItem}>
+    <TouchableOpacity onPress={onPress} style={styles.pickerModalItem}>
       <View>
         <Text style={{ fontWeight: "400", color: colors.text }}>{label}</Text>
-
       </View>
     </TouchableOpacity>
   );
@@ -49,8 +51,8 @@ export const DropdownPicker = ({
 
   return (
     <View>
-      <View style={componentStyles.pickerButton}>
-        <Text style={componentStyles.pickerButtonText}>{selected}</Text>
+      <View style={styles.pickerButton}>
+        <Text style={styles.pickerButtonText}>{selected}</Text>
         <View style={{ flexDirection: "column" }}>
           <Ionicons
             name="chevron-up"
@@ -69,10 +71,10 @@ export const DropdownPicker = ({
 
       <Modal visible={modalVisible} transparent={true} animationType="fade">
         <TouchableWithoutFeedback onPress={() => setModalVisible(false)}>
-          <View style={componentStyles.pickerModalContainer}>
+          <View style={styles.pickerModalContainer}>
             <View
               style={[
-                componentStyles.pickerOptionsContainer,
+                styles.pickerOptionsContainer,
                 { backgroundColor: colors.background2 },
               ]}
             >
@@ -90,7 +92,7 @@ export const DropdownPicker = ({
                   {itemIndex < options.length - 1 && (
                     <View
                       style={[
-                        componentStyles.pickerModalDivider,
+                        styles.pickerModalDivider,
                         { backgroundColor: colors.divider },
                       ]}
                     />
@@ -104,7 +106,3 @@ export const DropdownPicker = ({
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  // Modal
-});

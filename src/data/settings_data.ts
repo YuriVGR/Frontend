@@ -1,3 +1,4 @@
+// FontAwesome imports
 import { IconDefinition } from "@fortawesome/fontawesome-svg-core";
 import { StyleProp, ViewStyle } from "react-native";
 import {
@@ -16,6 +17,9 @@ import {
   faEyeSlash,
   faChevronRight,
 } from "@fortawesome/pro-solid-svg-icons";
+
+
+import { DropdownPicker } from "../components/settings_components/picker";
 
 // Settings Screens
 
@@ -108,7 +112,6 @@ export const settingsData: SettingsSection[] = [
       {
         type: "boolean",
         title: "Hide Read History",
-        onPress: () => {},
         leftIcon: faEyeSlash,
       },
     ],

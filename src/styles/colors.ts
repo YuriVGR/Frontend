@@ -1,25 +1,42 @@
-const lightColors = {
-  primary: "#4ade80",
-  secondary: "#0891b2",
-  background: "#f8f8f8",
-  background2: "#ffffff",
-  text: "#626262",
-  textLight: "#828282",
-  textDark: "#000000",
-  divider: "#00000010",
+export const themedColors = {
+  mint: "#6FD86F", // Mint Green
+  sunset: "#FD5E53", // Sunset Orange
+  emerald: "#50C878", // Emerald Green
+  picton: "#45B1E8",
 };
 
-const darkColors: typeof lightColors = {
-  primary: "#22c55e",
-  secondary: "#06b6d4",
-  background: "#111111",
-  background2: "#111111",
-  text: "#d1d5db",
-  textLight: "#626262",
-  textDark: "#ffffff",
-  divider: "#ffffff10",
+let color: keyof typeof themedColors = "mint";
+
+export let isDarkThemeGlobal: boolean = true;
+
+export const setTheme = (isDark: boolean) => {
+  isDarkThemeGlobal = isDark;
 };
 
-export let isDarkTheme = false;
+export const getColors = () => {
+  const currentTheme = themedColors[color];
 
-export const colors = isDarkTheme ? darkColors : lightColors;
+  const lightColors = {
+    primary: currentTheme,
+    secondary: "#0891b2",
+    background: "#f8f8f8",
+    background2: "#ffffff",
+    text: "#626262",
+    textLight: "#828282",
+    textDark: "#000000",
+    divider: "#00000020",
+  };
+
+  const darkColors: typeof lightColors = {
+    primary: currentTheme,
+    secondary: "#06b6d4",
+    background: "#111111",
+    background2: "#222222",
+    text: "#d1d5db",
+    textLight: "#828282",
+    textDark: "#ffffff",
+    divider: "#ffffff20",
+  };
+
+  return isDarkThemeGlobal ? darkColors : lightColors;
+};

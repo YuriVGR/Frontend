@@ -5,11 +5,19 @@ import ThemeSettings from "../screens/settings/settings_theme";
 import BackupSettings from "../screens/settings/settings_backup";
 import ReaderSettings from "../screens/settings/settings_reader";
 import DownloadManager from "../screens/settings/storage_downloadmanager";
-import { colors } from "../styles/colors";
+import { getColors } from "../styles/colors";
+import { useTheme } from "../hooks/themeprovider";
+import { useState, useEffect } from "react";
 
 const Stack = createNativeStackNavigator();
 
 export default function StackNavigator() {
+  const { styles } = useTheme();
+  const [colors, setColors] = useState(getColors());
+
+  useEffect(() => {
+    setColors(getColors());
+  }, [styles]);
 
   return (
     <Stack.Navigator

@@ -1,6 +1,7 @@
 import { View } from "react-native";
-import { componentStyles } from "../../styles/styles";
+import { useTheme } from "../../hooks/themeprovider";
 
 export default function Divider() {
-  return <View style={componentStyles.divider} />;
+  const { styles } = useTheme();
+  return <View style={styles.divider} />;
 }

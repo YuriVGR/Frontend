@@ -1,8 +1,8 @@
-import { View, Text, StyleSheet } from "react-native";
-import { colors } from "../../styles/colors";
-import { styles } from "../../styles/styles";
+import { View, Text } from "react-native";
+import { useTheme } from "../../hooks/themeprovider";
 
 export default function Updates() {
+  const { styles } = useTheme();
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Updates Screen</Text>

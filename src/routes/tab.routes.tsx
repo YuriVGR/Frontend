@@ -1,8 +1,9 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Ionicons } from "@expo/vector-icons";
-
+import { useState, useEffect } from "react";
 // Styles
-import { colors } from "../styles/colors";
+import { getColors } from "../styles/colors";
+import { useTheme } from "../hooks/themeprovider";
 
 // FontAwesome Imports
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
@@ -23,6 +24,13 @@ import LogTabRoutes from "./logtab.routes";
 const Tab = createBottomTabNavigator();
 
 export default function TabRoutes() {
+  const { styles } = useTheme();
+  const [colors, setColors] = useState(getColors());
+
+  useEffect(() => {
+    setColors(getColors());
+  }, [styles]);
+
   return (
     <Tab.Navigator
       screenOptions={({ route }) => ({
@@ -35,13 +43,7 @@ export default function TabRoutes() {
           } else if (route.name === "Settings") {
             iconName = faCog;
           }
-          return (
-            <FontAwesomeIcon
-              icon={iconName}
-              color={color}
-              size={size}
-            />
-          );
+          return <FontAwesomeIcon icon={iconName} color={color} size={size} />;
         },
         tabBarLabelStyle: {
           fontSize: 14,
@@ -49,8 +51,7 @@ export default function TabRoutes() {
         },
         tabBarStyle: {
           backgroundColor: colors.background,
-          borderColor: "red",
-          padding: 5,
+          padding: 8,
         },
         tabBarActiveTintColor: colors.primary,
         tabBarInactiveTintColor: colors.text,
@@ -68,9 +69,24 @@ export default function TabRoutes() {
       <Tab.Screen
         name="Logs"
         component={LogTabRoutes}
-        options={{ headerStyle: { backgroundColor: colors.background2 } }}
+        options={{
+          headerStyle: {
+            backgroundColor: colors.background2,
+            shadowColor: "transparent",
+          },
+        }}
       />
-      <Tab.Screen name="Settings" component={Settings} />
+      <Tab.Screen
+        name="Settings"
+        component={Settings}
+        options={{
+          tabBarStyle: {
+            padding: 8,
+            borderTopColor: "transparent",
+            backgroundColor: colors.background,
+          },
+        }}
+      />
     </Tab.Navigator>
   );
 }

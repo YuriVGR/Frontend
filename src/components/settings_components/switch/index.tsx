@@ -5,57 +5,54 @@ import {
   Animated,
   LayoutChangeEvent,
 } from "react-native";
-import { useState, useEffect, useRef } from "react";
-import { colors } from "../../styles/colors";
-import { componentStyles } from "../../styles/styles";
+import { useEffect, useRef } from "react";
+import { useTheme } from "../../../hooks/themeprovider";
+
 
 interface SwitchProps {
   onValueChange?: (value: boolean) => void;
   value: boolean;
-  onAdditionalPress?: () => void;
-  disabled?: () => void;
+  customPress?: () => void;
+  disabledPress?: () => void;
 }
 
 export default function Switch({
   onValueChange,
   value,
-  onAdditionalPress,
-  disabled,
+  customPress,
+  disabledPress,
 }: SwitchProps) {
-  const [isEnabled, setIsEnabled] = useState(false);
-  const [containerWidth, setContainerWidth] = useState(0);
-  const toggleAnim = useRef(new Animated.Value(0)).current;
+  const { styles } = useTheme();
+
+  const containerWidth = 50;
+  const toggleAnim = useRef(new Animated.Value(value ? 1 : 0)).current;
 
   const toggleSwitch = () => {
-    setIsEnabled((previousState) => {
-      const newState = !previousState;
-      if (onValueChange) {
-        onValueChange(newState);
-      }
-      return newState;
-    });
-  };
-
-  const handlePress = () => {
-    toggleSwitch();
-    if (onAdditionalPress && !isEnabled) {
-      onAdditionalPress();
-    } else if (disabled && isEnabled) {
-      disabled();
+    if (onValueChange) {
+      onValueChange(!value);
     }
   };
 
-  const onLayout = (event: LayoutChangeEvent) => {
-    const { width } = event.nativeEvent.layout;
-    setContainerWidth(width);
+  const handlePress = () => {
+    if (!value) {
+      if (customPress) {
+        customPress();
+      }
+    } else {
+      if (disabledPress) {
+        disabledPress();
+        return;
+      }
+    }
+    toggleSwitch();
   };
 
   useEffect(() => {
     Animated.spring(toggleAnim, {
-      toValue: isEnabled ? 1 : 0,
+      toValue: value ? 1 : 0,
       useNativeDriver: false,
     }).start();
-  }, [isEnabled]);
+  }, [value]);
 
   const toggleSize = containerWidth * 0.5;
   const moveDistance = containerWidth - toggleSize - 8;
@@ -64,17 +61,15 @@ export default function Switch({
     <TouchableWithoutFeedback onPress={handlePress}>
       <View
         style={[
-          componentStyles.switchContainer,
-          isEnabled && componentStyles.switchContainerEnabled,
+          styles.switchContainer,
+          value && styles.switchContainerEnabled,
         ]}
-        onLayout={onLayout}
       >
         <Animated.View
           style={[
-            componentStyles.switchToggle,
-            {
+            styles.switchToggle,
+            { 
               width: toggleSize,
-
               height: toggleSize,
               transform: [
                 {
