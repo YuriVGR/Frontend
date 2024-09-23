@@ -30,7 +30,7 @@ export default function SettingsItemHeader() {
       >
         <View>
           <Text style={styles.subTitle}>Logged in as</Text>
-          <Text style={styles.title}>Profile Name</Text>
+          <Text style={styles.title}>example@email.com</Text>
         </View>
         <View
           style={{

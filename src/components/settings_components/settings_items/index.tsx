@@ -17,6 +17,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 
 // Component imports
 import { Switch } from "react-native";
+import { CounterComponent } from "../counter";
 
 interface SettingsItemProps {
   item: SettingsItem;
@@ -56,12 +57,19 @@ export default function SettingsItemComponent({
     if (item.type === "boolean") {
       return <Switch value={value} onValueChange={onToggle} />;
     }
+    if (item.type === "counter") {
+      return <CounterComponent value={item.value} />;
+    }
   };
 
   const navigation = useNavigation<NavigationProp<never>>();
 
   const ItemWrapper: React.ElementType =
-    item.type === "boolean" ? View : TouchableOpacity;
+    item.type === "boolean" ||
+    item.type === "counter" ||
+    item.type === "selector"
+      ? View
+      : TouchableOpacity;
 
   const itemWrapperProps = () => {
     if (item.type === "boolean") {

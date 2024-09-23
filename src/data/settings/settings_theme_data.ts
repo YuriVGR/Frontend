@@ -40,6 +40,21 @@ export const themeSettingsData: SettingsSection[] = [
     ],
   },
   {
+    title: "Grid Settings",
+    items: [
+      {
+        type: "counter",
+        title: "Column on Portrait",
+        value: 5,
+      },
+      {
+        type: "counter",
+        title: "Column on Landscape",
+        value: 8,
+      },
+    ],
+  },
+  {
     title: "Custom Theme Options",
     items: [
       {

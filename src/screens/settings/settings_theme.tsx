@@ -9,6 +9,7 @@ import { themeSettingsData } from "../../data/settings/settings_theme_data";
 
 // Components
 import SettingsItemComponent from "../../components/settings_components/settings_items";
+import Divider from "../../components/divider";
 
 export default function ThemeSettings() {
   const { styles, toggleTheme, isDarkTheme } = useTheme();
@@ -25,15 +26,23 @@ export default function ThemeSettings() {
             {section.items.map((item, itemIndex) => {
               if (item.title === "Dark Mode") {
                 return (
-                  <SettingsItemComponent
-                    key={itemIndex}
-                    item={item}
-                    value={isDarkTheme}
-                    onToggle={handleThemeChange}
-                  />
+                  <React.Fragment key={itemIndex}>
+                    <SettingsItemComponent
+                      key={itemIndex}
+                      item={item}
+                      value={isDarkTheme}
+                      onToggle={handleThemeChange}
+                    />
+                    {itemIndex !== section.items.length - 1 && <Divider />}
+                  </React.Fragment>
                 );
               }
-              return <SettingsItemComponent key={itemIndex} item={item} />;
+              return (
+                <React.Fragment key={itemIndex}>
+                  <SettingsItemComponent key={itemIndex} item={item} />
+                  {itemIndex !== section.items.length - 1 && <Divider />}
+                </React.Fragment>
+              );
             })}
           </View>
         ))}

@@ -47,7 +47,8 @@ type SettingsItemType =
   | "danger"
   | "picker"
   | "boolean"
-  | "selector";
+  | "selector"
+  | "counter";
 
 // Settings Items
 
@@ -91,12 +92,18 @@ interface BooleanSettingsItem extends BaseSettingsItem {
   type: "boolean";
 }
 
+interface CounterSettingsItem extends BaseSettingsItem {
+  type: "counter";
+  value: number;
+}
+
 export type SettingsItem =
   | DefaultSettingsItem
   | DangerSettingsItem
   | PickerSettingsItem
   | BooleanSettingsItem
-  | SelectorSettingsItem;
+  | SelectorSettingsItem
+  | CounterSettingsItem;
 
 export interface SettingsSection {
   title: string;

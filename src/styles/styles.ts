@@ -28,7 +28,7 @@ export const createStyles = () => {
     //* Text Styles
     title: {
       fontWeight: "600",
-      fontSize: 20,
+      fontSize: 18,
       color: colors.textDark,
     },
     subTitle: {
@@ -199,6 +199,34 @@ export const createComponentStyles = () => {
       borderRadius: 16,
       backgroundColor: colors.background2,
       marginBottom: 10,
+    },
+    //! Counter Component
+    counterComponent: {
+      flexDirection: "row",
+      alignItems: "center",
+      gap: 20,
+      justifyContent: "flex-end",
+    },
+    counterButtons: {
+      flexDirection: "row",
+      alignItems: "center",
+      gap: 10,
+    },
+    decrementButton: {
+      padding: 8,
+      backgroundColor: colors.primary,
+      borderTopLeftRadius: 8,
+      borderBottomLeftRadius: 8,
+    },
+    incrementButton: {
+      padding: 8,
+      backgroundColor: colors.primary,
+      borderTopRightRadius: 8,
+      borderBottomRightRadius: 8,
+    },
+    counterText: {
+      fontSize: 16,
+      color: colors.textLight,
     },
   });
 };
